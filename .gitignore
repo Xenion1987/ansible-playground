@@ -1,0 +1,4 @@
+ssh-keys/server/*
+!ssh-keys/server/.keep
+ssh-keys/clients/*
+!ssh-keys/clients/.keep

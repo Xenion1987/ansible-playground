@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  ansible:
+    build: .
+    image: ansible_client
+    container_name: ansible
+    hostname: ansible
+    environment:
+      - 'TZ=Europe/Berlin'
+    volumes:
+      - ./ansible-files:/root/ansible:ro
+      - ./entrypoint/scripts:/entrypoint/scripts:ro
+      - ./ssh-keys/server:/root/.ssh:rw
+      #- ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:rw
+    networks:
+      - ansible
+
+  client-1:
+    image: ansible_client
+    container_name: client-1
+    hostname: client-1
+    depends_on:
+      - ansible
+    environment:
+      - 'TZ=Europe/Berlin'
+    volumes:
+      - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
+    networks:
+      - ansible
+
+networks:
+  ansible:
