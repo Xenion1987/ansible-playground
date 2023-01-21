@@ -65,3 +65,10 @@ alias src='. \${HOME}/.bashrc'
 _EOF
 source "${HOME}/.bashrc"
 activate-global-python-argcomplete --user
+
+if [[ -f ${HOME}/ansible/inventory ]]; then
+    cp -a "${HOME}/ansible/inventory.example" "${HOME}/ansible/inventory"
+fi
+if [[ -f ${HOME}/ansible/ansible.cfg ]]; then
+    cp -a "${HOME}/ansible/ansible.cfg.example" "${HOME}/ansible/ansible.cfg"
+fi
