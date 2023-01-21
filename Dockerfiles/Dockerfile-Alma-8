@@ -1,0 +1,10 @@
+FROM almalinux:8
+RUN dnf update -y && \
+    dnf install -y \
+    dnf-utils \
+    sudo \
+    python3 \
+    openssh-server
+RUN ssh-keygen -A
+RUN mkdir -p /run/sshd
+CMD ["/usr/sbin/sshd", "-D"]

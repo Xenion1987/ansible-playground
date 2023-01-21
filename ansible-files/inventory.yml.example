@@ -20,8 +20,8 @@ all:
         rpm_based:
           children:
             almalinux:
-              #hosts:
-              #  ansible-client-alma:
+              hosts:
+                ansible-client-alma:
             suse:
               #hosts:
               #  ansible-client-suse:
