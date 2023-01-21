@@ -2,3 +2,7 @@ ssh-keys/server/*
 !ssh-keys/server/.keep
 ssh-keys/clients/*
 !ssh-keys/clients/.keep
+
+ansible-files
+!ansible-files/inventory.example
+!ansible-files/ansible.cfg.example
