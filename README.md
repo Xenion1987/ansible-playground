@@ -24,7 +24,7 @@ docker compose build && docker compose up -d
 ### Execute the `init.sh` script
 
 ```
-docker compose exec ansible /bin/bash /entrypoint/scripts/init.sh
+docker compose exec ansible-control /bin/bash /entrypoint/scripts/init.sh
 ```
 
 > This step has to be done every time when the '`ansible`' container has been newly created (e.g. after a '`docker compose down`')
@@ -32,54 +32,13 @@ docker compose exec ansible /bin/bash /entrypoint/scripts/init.sh
 ### Enter the docker container `ansible`
 
 ```
-docker compose exec ansible /bin/bash
+docker compose exec ansible-control /bin/bash
 ```
 
-## Test if clients answer to ansible commands
-
-### Enter the docker container `ansible`
+Inside the container, you have to switch to `~/ansible/`
 
 ```
-docker compose exec ansible /bin/bash
+cd ~/ansible
 ```
 
-### Send a 'ping' to all clients
-
-```
-cd $HOME/ansible
-ansible all -m ping 
-```
-The output should look like this:
-```
-root@ansible:~/ansible# ansible -m ping all
-client-1 | SUCCESS => {
-    "ansible_facts": {
-        "discovered_interpreter_python": "/usr/bin/python3"
-    },
-    "changed": false,
-    "ping": "pong"
-}
-client-2 | SUCCESS => {
-    "ansible_facts": {
-        "discovered_interpreter_python": "/usr/bin/python3"
-    },
-    "changed": false,
-    "ping": "pong"
-}
-client-3 | SUCCESS => {
-    "ansible_facts": {
-        "discovered_interpreter_python": "/usr/bin/python3"
-    },
-    "changed": false,
-    "ping": "pong"
-}
-client-4 | SUCCESS => {
-    "ansible_facts": {
-        "discovered_interpreter_python": "/usr/bin/python3"
-    },
-    "changed": false,
-    "ping": "pong"
-}
-root@ansible:~/ansible#
-```
 ## Now you're ready to play

@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+# shellcheck disable=SC2046
+
 docker compose down
 docker builder prune -f
 DOCKER_IMAGE_OUTPUT=$(docker image ls -q "ansible_client_*")
