@@ -3,7 +3,10 @@ RUN dnf update -y && \
     dnf install -y \
     dnf-utils \
     sudo \
+    curl \
+    iproute \
     python3 \
+    openssh-clients \
     openssh-server
 RUN ssh-keygen -A
 RUN mkdir -p /run/sshd

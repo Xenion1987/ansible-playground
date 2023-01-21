@@ -5,7 +5,9 @@ RUN apt update && \
     dialog \
     apt-utils \
     sudo \
+    curl \
+    iproute2 \
     python3 \
     openssh-server
-RUN mkdir -p /run/sshd
+RUN mkdir -p /run/sshd && ssh-keygen -A
 CMD ["/usr/sbin/sshd", "-D"]

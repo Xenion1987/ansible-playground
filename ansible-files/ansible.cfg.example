@@ -2,6 +2,9 @@
 inventory = ./inventory.yml
 log_path = ${HOME}/ansible/log/ansible.log
 private_key_file = ${HOME}/.ssh/id_rsa
+retry_files_enabled = yes
+retry_files_save_path = ${HOME}/.ansible/retry-files
+force_handlers = true
 
 [ssh_connection]
 scp_if_ssh = True
