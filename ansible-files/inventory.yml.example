@@ -9,18 +9,19 @@ all:
         #ansible_ssh_private_key_file: ~/.ssh/id_rsa 
         ansible_ssh_transfer_method: scp
       children:
-        debian:
-          hosts:
-            client-1:
-            client-2:
-            client-3:
-            client-4:
-        ubuntu:
-          #hosts:
-          #  client-2:
-        almalinux:
-          #hosts:
-          #  client-3:
-        suse:
-          #hosts:
-          #  client-4:
+        deb_based:
+          children:
+            debian:
+              hosts:
+                ansible-client-debian:
+            ubuntu:
+              hosts:
+                ansible-client-ubuntu:
+        rpm_based:
+          children:
+            almalinux:
+              #hosts:
+              #  ansible-client-alma:
+            suse:
+              #hosts:
+              #  ansible-client-suse:

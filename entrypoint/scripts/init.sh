@@ -19,9 +19,8 @@ apt update &&
 python3 -m pip install argcomplete
 
 [[ ! -f /root/.ssh/id_rsa ]] && ssh-keygen -t rsa -b 4096 -f /root/.ssh/id_rsa -N '' -C "ansible-playground_$(date +%F)"
-if [[ -f /root/.ssh/id_rsa.pub ]] && [[ ! -f /root/.ssh/authorized_keys ]]; then
-    tee /root/.ssh/authorized_keys </root/.ssh/id_rsa.pub
-fi
+tee /root/.ssh/authorized_keys </root/.ssh/id_rsa.pub
+
 cat <<_EOF >"${HOME}/.bashrc"
 export LS_OPTIONS='--color=auto'
 eval "\$(dircolors -b)"
@@ -68,11 +67,14 @@ _EOF
 source "${HOME}/.bashrc"
 activate-global-python-argcomplete --user
 
-if [[ ! -f ${HOME}/ansible/inventory ]]; then
-    cp -a "${HOME}/ansible/inventory.example" "${HOME}/ansible/inventory"
+if [[ ! -f ${HOME}/ansible/inventory.yml ]]; then
+    cp -a "${HOME}/ansible/inventory.yml.example" "${HOME}/ansible/inventory.yml"
 fi
 if [[ ! -f ${HOME}/ansible/ansible.cfg ]]; then
     cp -a "${HOME}/ansible/ansible.cfg.example" "${HOME}/ansible/ansible.cfg"
 fi
 mkdir -p "${HOME}/ansible/log/"
 touch "${HOME}/ansible/log/ansible.log"
+
+cd "${HOME}/ansible" || exit
+ansible all -o -m ping

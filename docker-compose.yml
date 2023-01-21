@@ -1,11 +1,13 @@
 version: '3'
 
 services:
-  ansible:
-    build: .
-    image: ansible_client
-    container_name: ansible
-    hostname: ansible
+  ansible-control:
+    build:
+      context: ./Dockerfiles
+      dockerfile: Dockerfile-Debian-11
+    image: ansible_client_debian
+    container_name: ansible-control
+    hostname: control.ansible
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
@@ -15,52 +17,35 @@ services:
     networks:
       - ansible
 
-  client-1:
-    image: ansible_client
-    container_name: client-1
-    hostname: client-1
+  ansible-client-debian:
+    build:
+      context: ./Dockerfiles
+      dockerfile: Dockerfile-Debian-11
+    image: ansible_client_debian
+    container_name: ansible-client-debian
+    hostname: debian.client.ansible
     depends_on:
-      - ansible
+      - ansible-control
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
-      - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
+      - ./ssh-keys/server/authorized_keys:/root/.ssh/authorized_keys:ro
     networks:
       - ansible
-  client-2:
-    image: ansible_client
-    container_name: client-2
-    hostname: client-2
+
+  ansible-client-ubuntu:
+    build:
+      context: ./Dockerfiles
+      dockerfile: Dockerfile-Ubuntu-LTS
+    image: ansible_client_ubuntu
+    container_name: ansible-client-ubuntu
+    hostname: ubuntu.client.ansible
     depends_on:
-      - ansible
+      - ansible-control
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
-      - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
-    networks:
-      - ansible
-  client-3:
-    image: ansible_client
-    container_name: client-3
-    hostname: client-3
-    depends_on:
-      - ansible
-    environment:
-      - 'TZ=Europe/Berlin'
-    volumes:
-      - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
-    networks:
-      - ansible
-  client-4:
-    image: ansible_client
-    container_name: client-4
-    hostname: client-4
-    depends_on:
-      - ansible
-    environment:
-      - 'TZ=Europe/Berlin'
-    volumes:
-      - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
+      - ./ssh-keys/server/authorized_keys:/root/.ssh/authorized_keys:ro
     networks:
       - ansible
 

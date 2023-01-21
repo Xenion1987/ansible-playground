@@ -1,5 +1,5 @@
 [defaults]
-inventory = ./inventory
+inventory = ./inventory.yml
 log_path = ${HOME}/ansible/log/ansible.log
 private_key_file = ${HOME}/.ssh/id_rsa
 

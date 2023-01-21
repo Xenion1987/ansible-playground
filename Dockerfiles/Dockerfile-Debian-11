@@ -1,0 +1,11 @@
+FROM debian:11
+RUN apt update && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt install -y --no-install-recommends \
+    dialog \
+    apt-utils \
+    sudo \
+    python3 \
+    openssh-server
+RUN mkdir -p /run/sshd
+CMD ["/usr/sbin/sshd", "-D"]
