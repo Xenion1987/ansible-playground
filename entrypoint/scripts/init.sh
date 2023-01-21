@@ -12,6 +12,7 @@ apt update &&
         iputils-ping \
         procps \
         psutils \
+        direnv \
         python3-pip \
         ansible
 
@@ -36,6 +37,7 @@ done
 if [[ -f \${HOME}/.bash_completion.d/python-argcomplete ]]; then
     source \${HOME}/.bash_completion.d/python-argcomplete
 fi
+eval "\$(direnv hook bash)"
 _EOF
 
 files=(.bash_aliases .functions .paths)
@@ -72,3 +74,5 @@ fi
 if [[ ! -f ${HOME}/ansible/ansible.cfg ]]; then
     cp -a "${HOME}/ansible/ansible.cfg.example" "${HOME}/ansible/ansible.cfg"
 fi
+mkdir -p "${HOME}/ansible/log/"
+touch "${HOME}/ansible/log/ansible.log"

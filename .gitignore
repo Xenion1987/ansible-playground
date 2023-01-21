@@ -4,5 +4,5 @@ ssh-keys/clients/*
 !ssh-keys/clients/.keep
 
 ansible-files
-!ansible-files/inventory.example
+!ansible-files/inventory.yml.example
 !ansible-files/ansible.cfg.example
