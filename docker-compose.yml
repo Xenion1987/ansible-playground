@@ -9,7 +9,7 @@ services:
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
-      - ./ansible-files:/root/ansible:ro
+      - ./ansible-files:/root/ansible:rw
       - ./entrypoint/scripts:/entrypoint/scripts:ro
       - ./ssh-keys/server:/root/.ssh:rw
     networks:
