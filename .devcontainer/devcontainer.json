@@ -23,9 +23,9 @@
 		}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [
-		2222
-	],
+	// "forwardPorts": [
+	// 	2222
+	// ],
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
@@ -53,7 +53,9 @@
 				"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
 				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
 				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
+				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
+				"ansible.validation.lint.path": "ansible-lint",
+				"ansible.ansible.path": "/usr/bin/ansible"
 			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
