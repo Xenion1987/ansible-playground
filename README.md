@@ -2,43 +2,46 @@
 
 ## Installing
 
+### Install requirements
+
+1. [vscode](https://code.visualstudio.com/Download)
+1. [docker compose](https://docs.docker.com/compose/install/)
+1. vscode plugins
+    1. [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
 ### Clone this repository
-```
+
+```sh
 git clone https://github.com/Access-InTech/ansible-playground.git
 ```
 
-### Enter the created repository directory
+## Start the playground
 
-```
-cd ansible-playground
-```
+### Prepare ansible control node
 
-### Start the playground
+Ansible requires to connect via SSH to the clients. That's why we need to export devcontainer's SSH public key into the client's containers.
 
-```
-docker compose build && docker compose up -d
+```sh
+bash ./scripts/init-ansible-playground.sh
 ```
 
-## Setup Ansible control node
+This script...
+    - ... builds the client's images
+    - ... creates the SSH keypair used by ansible within this project
+    - ... creates the `authorized_keys` file to allow `ansible-control` to ssh to all clients
+    - ... creates the docker network used for this project
+    - ... starts the client's containers
 
-### Execute the `init.sh` script
+### Start the ansible control container
 
-```
-docker compose exec ansible-control /bin/bash /entrypoint/scripts/init.sh
-```
+Open the repository in vscode. Vscode should give you a hint, that it has detected a DevContainer config and asks you to reopen it in DevContainer. Accept to initialize the ansible-control container.
 
-> This step has to be done every time when the '`ansible`' container has been newly created (e.g. after a '`docker compose down`')
+#### Add some customizations to ansible-control
 
-### Enter the docker container `ansible`
+1. Inside the DevContainer, open the vscode terminal
+1. Run `bash scripts/customize-ansible-control.sh`
+1. Resource your `.bashrc` via `source ~/.bashrc`
 
-```
-docker compose exec ansible-control /bin/bash
-```
-
-Inside the container, you have to switch to `~/ansible/`
-
-```
-cd ~/ansible
-```
+Ansible autocompletion should now work for you.
 
 ## Now you're ready to play

@@ -1,9 +1,11 @@
 #! /usr/bin/env bash
 
+WORKDIR="/workspaces/ansible-playground"
+
 function install_basics() {
-    apt update
+    sudo apt update
     export DEBIAN_FRONTEND=noninteractive
-    apt install -y --no-install-recommends \
+    sudo apt install -y --no-install-recommends \
         dialog \
         apt-utils \
         sudo \
@@ -17,14 +19,14 @@ function install_basics() {
         direnv \
         python3-pip \
         ansible
-    python3 -m pip install argcomplete
+    python -m pip install --user argcomplete
 }
 function create_initial_ssh_keypair() {
-    [[ ! -f /root/.ssh/id_rsa ]] && ssh-keygen -t rsa -b 4096 -f /root/.ssh/id_rsa -N '' -C "ansible-playground_$(date +%F)"
-    tee /root/.ssh/authorized_keys </root/.ssh/id_rsa.pub
+    [[ ! -f ${HOME}/.ssh/id_rsa ]] && ssh-keygen -t rsa -b 4096 -f ${HOME}/.ssh/id_rsa -N '' -C "ansible-playground_$(date +%F)"
+    tee ${HOME}/.ssh/authorized_keys <${HOME}/.ssh/id_rsa.pub
 }
 function generate_config_files() {
-    cat <<_EOF >"${HOME}/.bashrc"
+    cat <<_EOF >>"${HOME}/.bashrc"
 export LS_OPTIONS='--color=auto'
 eval "\$(dircolors -b)"
 
@@ -73,23 +75,23 @@ autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab au
 _EOF
 }
 function prepare_ansible_defaults() {
-    if [[ ! -f ${HOME}/ansible/inventory.yml ]]; then
-        cp -a "${HOME}/ansible/inventory.yml.example" "${HOME}/ansible/inventory.yml"
+    if [[ ! -f ${WORKDIR}/ansible-files/inventory.yml ]]; then
+        cp -a "${WORKDIR}/ansible-files/inventory.yml.example" "${WORKDIR}/ansible-files/inventory.yml"
     fi
-    if [[ ! -f ${HOME}/ansible/ansible.cfg ]]; then
-        cp -a "${HOME}/ansible/ansible.cfg.example" "${HOME}/ansible/ansible.cfg"
+    if [[ ! -f ${WORKDIR}/ansible-files/ansible.cfg ]]; then
+        cp -a "${WORKDIR}/ansible-files/ansible.cfg.example" "${WORKDIR}/ansible-files/ansible.cfg"
     fi
     mkdir -p "${HOME}/ansible/log/"
     touch "${HOME}/ansible/log/ansible.log"
     activate-global-python-argcomplete --user
 }
 function test_initial_client_connection() {
-    cd "${HOME}/ansible" || exit
-    ansible all -o -m ping
+    cd "${WORKDIR}/ansible-files" || exit
+    ansible all -o -m ping 
 }
 function main() {
     install_basics
-    create_initial_ssh_keypair
+    #create_initial_ssh_keypair
     generate_config_files
     create_vim_config
     prepare_ansible_defaults
