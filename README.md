@@ -26,11 +26,11 @@ bash ./scripts/init-ansible-playground.sh
 ```
 
 This script...
-    - ... builds the client's images
-    - ... creates the SSH keypair used by ansible within this project
-    - ... creates the `authorized_keys` file to allow `ansible-control` to ssh to all clients
-    - ... creates the docker network used for this project
-    - ... starts the client's containers
+- ... builds the client's images
+- ... creates the SSH keypair used by ansible within this project
+- ... creates the `authorized_keys` file to allow `ansible-control` to ssh to all clients
+- ... creates the docker network used for this project
+- ... starts the client's containers
 
 ### Start the ansible control container
 
