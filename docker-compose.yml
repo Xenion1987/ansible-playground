@@ -1,22 +1,6 @@
 version: '3'
 
 services:
-  #ansible-control:
-  #  build:
-  #    context: ./Dockerfiles
-  #    dockerfile: Dockerfile-Debian-11
-  #  image: ansible_client_debian
-  #  container_name: ansible-control
-  #  hostname: control.ansible
-  #  environment:
-  #    - 'TZ=Europe/Berlin'
-  #  volumes:
-  #    - ./ansible-files:/root/ansible:rw
-  #    - ./entrypoint/scripts:/entrypoint/scripts:ro
-  #    - ./ssh-keys/server:/root/.ssh:rw
-  #  networks:
-  #    - ansible
-
   ansible-client-debian:
     build:
       context: ./Dockerfiles
@@ -24,12 +8,9 @@ services:
     image: ansible_client_debian
     container_name: ansible-client-debian
     hostname: debian.client.ansible
-    #depends_on:
-    #  - ansible-control
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
-      #- ./ssh-keys/clients:/root/.ssh/:rw
       - ./ssh-keys/clients/authorized_keys:/root/authorized_keys:ro
     networks:
       - ansible-playground
@@ -41,12 +22,9 @@ services:
     image: ansible_client_ubuntu
     container_name: ansible-client-ubuntu
     hostname: ubuntu.client.ansible
-    #depends_on:
-    #  - ansible-control
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
-      #- ./ssh-keys/clients:/root/.ssh/:rw
       - ./ssh-keys/clients/authorized_keys:/root/authorized_keys:ro
     networks:
       - ansible-playground
@@ -58,12 +36,9 @@ services:
     image: ansible_client_alma
     container_name: ansible-client-alma
     hostname: alma.client.ansible
-    #depends_on:
-    #  - ansible-control
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
-      #- ./ssh-keys/clients:/root/.ssh/:rw
       - ./ssh-keys/clients/authorized_keys:/root/authorized_keys:ro
     networks:
       - ansible-playground
