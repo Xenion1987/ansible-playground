@@ -45,3 +45,5 @@ Open the repository in vscode. Vscode should give you a hint, that it has detect
 Ansible autocompletion and ansible-lint should now work for you.
 
 ## Now you're ready to play
+### Example
+![image](https://user-images.githubusercontent.com/39803750/214030375-86c6b518-a169-443d-9b91-8543a71da9df.png)
