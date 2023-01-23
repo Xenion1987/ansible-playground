@@ -36,14 +36,8 @@ This script...
 
 Open the repository in vscode. Vscode should give you a hint, that it has detected a DevContainer config and asks you to reopen it in DevContainer. Accept to initialize the ansible-control container.
 
-#### Add some customizations to ansible-control
-
-1. Inside the DevContainer, open the vscode terminal
-1. Run `bash scripts/customize-ansible-control.sh`
-1. Source `.bashrc` to update your environment via `source ~/.bashrc`
-
-Ansible autocompletion and ansible-lint should now work for you.
-
 ## Now you're ready to play
+
 ### Example
+
 ![image](https://user-images.githubusercontent.com/39803750/214030375-86c6b518-a169-443d-9b91-8543a71da9df.png)
