@@ -40,8 +40,8 @@ Open the repository in vscode. Vscode should give you a hint, that it has detect
 
 1. Inside the DevContainer, open the vscode terminal
 1. Run `bash scripts/customize-ansible-control.sh`
-1. Resource your `.bashrc` via `source ~/.bashrc`
+1. Source `.bashrc` to update your environment via `source ~/.bashrc`
 
-Ansible autocompletion should now work for you.
+Ansible autocompletion and ansible-lint should now work for you.
 
 ## Now you're ready to play
