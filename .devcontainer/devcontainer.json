@@ -73,7 +73,7 @@
 	// "remoteUser": "root"
 	"mounts": [
 		//"source=${localEnv:HOME}${localEnv:USERPROFILE}/workspace/ansible-playground/ssh-keys/server,target=/home/vscode/.ssh,type=bind,consistency=cached",
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/workspace/ansible-playground/ssh-keys/server,target=/home/vscode/.ssh,type=bind,consistency=cached"
+		"source=${localWorkspaceFolder}/ssh-keys/server,target=/home/vscode/.ssh,type=bind,consistency=cached"
 	]
 	//"postCreateCommand": "ssh-keygen -t rsa -b 4096 -f ${HOME}/.ssh/id_rsa -N '' -C 'ansible-playground_$(date +%F)'"
 }
