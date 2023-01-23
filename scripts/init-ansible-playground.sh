@@ -8,7 +8,7 @@ if docker compose build; then
         ansible_client_ubuntu \
             ssh-keygen -t rsa -b 4096 -f /root/.ssh/server/id_rsa -N '' -C "ansible-playground_$(date +%Y%m%d_%H%M%S)"
     
-    echo "Add 'authorized_keys' with root's puböic key for all clients"
+    echo "Add 'authorized_keys' with root's public key for all clients"
     docker run -it --rm \
         -v ${PWD}/ssh-keys/clients/:/root/.ssh/clients \
         -v ${PWD}/ssh-keys/server/:/root/.ssh/server \
