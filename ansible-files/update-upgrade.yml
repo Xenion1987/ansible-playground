@@ -1,0 +1,16 @@
+---
+- name: Play for update and upgrade packages
+  hosts: all
+  tasks:
+    - name: Update and upgrade apt packages
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: "yes"
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+    - name: Update and upgrade yum packages excluding kernel related packages
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+        exclude: kernel*
+      when: ansible_distribution in ["AlmaLinux", "OpenSUSE"]
