@@ -42,6 +42,7 @@
 				"git.autofetchPeriod": 90,
 				"git.confirmSync": false,
 				"files.autoSave": "off",
+				"redhat.telemetry.enabled": false,
 				"terminal.integrated.scrollback": 10000,
 				"ansible.validation.lint.path": "ansible-lint",
 				"ansible.ansible.path": "/usr/bin/ansible"
