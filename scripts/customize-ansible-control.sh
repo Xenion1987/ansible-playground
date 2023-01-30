@@ -17,8 +17,10 @@ function install_basics() {
         psutils \
         git \
         direnv \
+        python3-pip \
         ansible
-    python -m pip install --user argcomplete ansible-lint
+    python3 -m pip install --user argcomplete ansible-lint
+    sudo ln -s /usr/bin/python3 /usr/bin/python
 }
 function create_initial_ssh_keypair() {
     [[ ! -f ${HOME}/.ssh/id_rsa ]] && ssh-keygen -t rsa -b 4096 -f ${HOME}/.ssh/id_rsa -N '' -C "ansible-playground_$(date +%F)"
