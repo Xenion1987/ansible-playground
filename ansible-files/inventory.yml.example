@@ -25,5 +25,5 @@ all:
               hosts:
                 ansible-client-alma:
             suse:
-              #hosts:
-              #  ansible-client-suse:
+              hosts:
+                ansible-client-suse:

@@ -43,6 +43,20 @@ services:
     networks:
       - ansible-playground
 
+  ansible-client-suse:
+    build:
+      context: ./Dockerfiles
+      dockerfile: Dockerfile-OpenSUSE-Leap-15
+    image: ansible_client_suse
+    container_name: ansible-client-suse
+    hostname: suse.client.ansible
+    environment:
+      - 'TZ=Europe/Berlin'
+    volumes:
+      - ./ssh-keys/clients/authorized_keys:/root/authorized_keys:ro
+    networks:
+      - ansible-playground
+
 networks:
   ansible-playground:
     external: true

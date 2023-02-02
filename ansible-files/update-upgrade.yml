@@ -13,4 +13,10 @@
         name: '*'
         state: latest
         exclude: kernel*
-      when: ansible_distribution in ["AlmaLinux", "OpenSUSE"]
+      when: ansible_distribution in ["AlmaLinux"]
+
+    - name: UpdateOpenSUSE
+      community.general.zypper:
+        name: '*'
+        state: latest
+      when: ansible_distribution in ["openSUSE Leap"]
