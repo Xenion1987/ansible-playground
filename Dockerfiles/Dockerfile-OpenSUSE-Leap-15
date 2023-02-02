@@ -1,0 +1,12 @@
+FROM opensuse/leap:15
+RUN zypper update -y && \
+    zypper install -y \
+    sudo \
+    curl \
+    iproute2 \
+    python3 \
+    openssh-clients \
+    openssh-server
+RUN ssh-keygen -A
+RUN mkdir -p /run/sshd
+CMD ["/usr/sbin/sshd", "-D"]
