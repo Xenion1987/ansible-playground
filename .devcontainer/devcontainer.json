@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
 	"name": "Debian-11-Ansible",
-	"initializeCommand": "[[ $(docker network ls -qf name=ansible-playground) =~ [0-9a-z]{12} ]] || docker network create ansible-playground",
+	"initializeCommand": "bash ./scripts/init-ansible-playground.sh",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/base:debian",
 	"runArgs": [

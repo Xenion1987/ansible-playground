@@ -1,5 +1,9 @@
 #! /usr/bin/env bash
 
+if [[ ! $(docker network ls -qf name=ansible-playground) =~ [0-9a-z]{12} ]]; then
+    docker network create ansible-playground
+fi
+
 if docker compose build; then
     echo "Generate initial SSH keypair"
     docker run -it --rm \
