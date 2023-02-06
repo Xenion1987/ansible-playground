@@ -20,9 +20,14 @@ function install_basics() {
         python3-pip \
         ansible
     python3 -m pip install --user argcomplete ansible-lint
-    sudo ln -s /usr/bin/python3 /usr/bin/python
+    if [[ ! -f /usr/bin/python ]] ; then
+        sudo ln -s /usr/bin/python3 /usr/bin/python
+    fi
 }
 function generate_config_files() {
+    if find ~ -type f -name '.functions' | grep -q .; then
+      return 0
+    fi
     cat <<_EOF >>"${HOME}/.bashrc"
 export LS_OPTIONS='--color=auto'
 eval "\$(dircolors -b)"

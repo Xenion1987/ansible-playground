@@ -5,7 +5,7 @@ services:
     build:
       context: ./Dockerfiles
       dockerfile: Dockerfile-Debian-11
-    image: ansible_client_debian
+    image: ansible-client-debian
     container_name: ansible-client-debian
     hostname: debian.client.ansible
     environment:
@@ -19,7 +19,7 @@ services:
     build:
       context: ./Dockerfiles
       dockerfile: Dockerfile-Ubuntu-22.04
-    image: ansible_client_ubuntu
+    image: ansible-client-ubuntu
     container_name: ansible-client-ubuntu
     hostname: ubuntu.client.ansible
     environment:
@@ -33,7 +33,7 @@ services:
     build:
       context: ./Dockerfiles
       dockerfile: Dockerfile-Alma-8
-    image: ansible_client_alma
+    image: ansible-client-alma
     container_name: ansible-client-alma
     hostname: alma.client.ansible
     environment:
@@ -47,7 +47,7 @@ services:
     build:
       context: ./Dockerfiles
       dockerfile: Dockerfile-OpenSUSE-Leap-15
-    image: ansible_client_suse
+    image: ansible-client-suse
     container_name: ansible-client-suse
     hostname: suse.client.ansible
     environment:
