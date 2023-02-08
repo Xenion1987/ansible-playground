@@ -3,7 +3,7 @@
 # shellcheck disable=SC2046
 
 docker compose down
-docker container rm -f $(docker container ls -qa -f name="ansible-control")
+docker container rm -f $(docker container ls -qa -f name="ansible-playground-control")
 docker image rm $(docker image ls -q "ansible-client-*")
 docker image rm $(docker image ls -q "vcs-ansible-playground*")
 docker builder prune -f
