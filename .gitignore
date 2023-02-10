@@ -1,3 +1,8 @@
+ansible-files/ansible.cfg
+ansible-files/inventory.yml
+ansible-files/playbooks/*
+!ansible-files/playbooks/update-upgrade.yml
+
 ssh-keys/server/id_rsa*
 ssh-keys/server/known_hosts*
 ssh-keys/clients/authorized_keys
