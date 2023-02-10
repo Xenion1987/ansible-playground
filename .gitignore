@@ -1,8 +1,3 @@
-ssh-keys/server/*
-!ssh-keys/server/.keep
-ssh-keys/clients/*
-!ssh-keys/clients/.keep
-
-ansible-files
-!ansible-files/inventory.yml.example
-!ansible-files/ansible.cfg.example
+ssh-keys/server/id_rsa*
+ssh-keys/server/known_hosts*
+ssh-keys/clients/authorized_keys
