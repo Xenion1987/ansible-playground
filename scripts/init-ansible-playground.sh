@@ -15,6 +15,8 @@ if [[ ${#build_images[@]} -gt 0 ]]; then
 fi
 echo "---------------- DOCKER IMAGES BUILT ---------------"
 
+[[ ! -f  ${PWD}/ssh-keys/clients/authorized_keys ]] && touch ${PWD}/ssh-keys/clients/authorized_key
+
 docker compose up -d
 
 if ! find ssh-keys -type f -name id_rsa | grep -q .; then
