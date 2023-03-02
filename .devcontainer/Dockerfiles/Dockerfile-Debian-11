@@ -1,5 +1,4 @@
-FROM ubuntu:22.04
-RUN sed -i 's,http://archive,http://de.archive,' /etc/apt/sources.list
+FROM debian:11
 RUN apt update && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt install -y --no-install-recommends \
@@ -9,6 +8,7 @@ RUN apt update && \
     curl \
     iproute2 \
     python3 \
-    openssh-server
-RUN mkdir -p /run/sshd
+    openssh-server \
+    && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /run/sshd && ssh-keygen -A
 CMD ["/usr/sbin/sshd", "-D"]

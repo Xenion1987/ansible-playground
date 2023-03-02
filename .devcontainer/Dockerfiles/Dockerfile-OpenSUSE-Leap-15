@@ -6,7 +6,7 @@ RUN zypper update -y && \
     iproute2 \
     python3 \
     openssh-clients \
-    openssh-server
-RUN ssh-keygen -A
-RUN mkdir -p /run/sshd
+    openssh-server \
+    && zypper clean -a
+RUN mkdir -p /run/sshd && ssh-keygen -A
 CMD ["/usr/sbin/sshd", "-D"]

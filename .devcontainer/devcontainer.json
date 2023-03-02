@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
 	"name": "Debian-11-Ansible",
-	"initializeCommand": "bash ./scripts/init-ansible-playground.sh",
+	"initializeCommand": "bash ./.devcontainer/scripts/init-ansible-playground.sh",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/base:debian",
 	"runArgs": [
@@ -50,8 +50,8 @@
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
 	"mounts": [
-		"source=${localWorkspaceFolder}/ssh-keys/server,target=/home/vscode/.ssh,type=bind,consistency=cached"
+		"source=${localWorkspaceFolder}/.devcontainer/ssh-keys/server,target=/home/vscode/.ssh,type=bind,consistency=cached"
 		//"source=${localEnv:HOME}${localEnv:USERPROFILE}/workspace/ansible-playground/ssh-keys/server,target=/home/vscode/.ssh,type=bind,consistency=cached",
 	],
-	"postCreateCommand": "bash ./scripts/customize-ansible-control.sh"
+	"postCreateCommand": "bash ./.devcontainer/scripts/customize-ansible-control.sh"
 }

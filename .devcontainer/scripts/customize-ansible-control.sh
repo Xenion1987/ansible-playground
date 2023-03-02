@@ -74,18 +74,17 @@ autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab au
 _EOF
 }
 function prepare_ansible_defaults() {
-  if [[ ! -f ${WORKDIR}/ansible-files/inventory.yml ]]; then
-    cp -a "${WORKDIR}/ansible-files/inventory.yml.example" "${WORKDIR}/ansible-files/inventory.yml"
+  if [[ ! -f ${WORKDIR}/inventory.yml ]]; then
+    cp -a "${WORKDIR}/inventory.yml.example" "${WORKDIR}/inventory.yml"
   fi
-  if [[ ! -f ${WORKDIR}/ansible-files/ansible.cfg ]]; then
-    cp -a "${WORKDIR}/ansible-files/ansible.cfg.example" "${WORKDIR}/ansible-files/ansible.cfg"
+  if [[ ! -f ${WORKDIR}/ansible.cfg ]]; then
+    cp -a "${WORKDIR}/ansible.cfg.example" "${WORKDIR}/ansible.cfg"
   fi
-  mkdir -p "${HOME}/ansible/log/"
-  touch "${HOME}/ansible/log/ansible.log"
+  mkdir -p "${HOME}/.ansible/log/"
+  touch "${HOME}/.ansible/log/ansible.log"
   activate-global-python-argcomplete --user
 }
 function test_initial_client_connection() {
-  cd "${WORKDIR}/ansible-files" || exit
   ansible all -o -m ping
 }
 function main() {
