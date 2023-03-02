@@ -11,21 +11,18 @@ function install_basics() {
     sudo \
     vim \
     curl \
-    wget \
     iputils-ping \
-    procps \
-    psutils \
     git \
     direnv \
-    python3-pip \
-    ansible
-  python3 -m pip install --user argcomplete ansible-lint
+    python3-pip
+  sudo rm -rf /var/lib/apt/lists/*
+  python3 -m pip install --upgrade --user pip argcomplete ansible ansible-lint
   if [[ ! -f /usr/bin/python ]]; then
     sudo ln -s /usr/bin/python3 /usr/bin/python
   fi
 }
 function generate_config_files() {
-  if find ~ -type f -name '.functions' | grep -q .; then
+  if find "${HOME}" -type f -name '.functions' | grep -q .; then
     return 0
   fi
   cat <<_EOF >>"${HOME}/.bashrc"

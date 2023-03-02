@@ -15,7 +15,9 @@ if [[ ${#build_images[@]} -gt 0 ]]; then
 fi
 echo "---------------- DOCKER IMAGES BUILT ---------------"
 
-[[ ! -f  ${PWD}/ssh-keys/clients/authorized_keys ]] && touch ${PWD}/ssh-keys/clients/authorized_keys
+if [[ ! -f ${PWD}/ssh-keys/clients/authorized_keys ]]; then
+  touch ${PWD}/ssh-keys/clients/authorized_keys
+fi
 
 docker compose up -d
 
@@ -50,4 +52,11 @@ if ! find ssh-keys -type f -name id_rsa | grep -q .; then
     docker compose exec "${s}" cp /root/authorized_keys /root/.ssh/authorized_keys
   done
 fi
+echo "Copy 'authorized_keys' into client's root ssh dir"
+for s in $(docker compose ps --services --status running); do
+  echo "${s}"
+  docker compose exec "${s}" mkdir -p /root/.ssh
+  docker compose exec "${s}" chmod 700 /root/.ssh
+  docker compose exec "${s}" cp /root/authorized_keys /root/.ssh/authorized_keys
+done
 echo "--------------- SSH KEYFILES DEPLOYED --------------"
