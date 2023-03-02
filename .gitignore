@@ -2,6 +2,7 @@
 .devcontainer/ssh-keys/server/id_rsa.pub
 .devcontainer/ssh-keys/server/known_hosts
 .devcontainer/ssh-keys/clients/authorized_keys
+collections/*
 group_vars/*
 host_vars/*
 inventory/*
