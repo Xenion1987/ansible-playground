@@ -24,7 +24,7 @@ git clone https://github.com/Access-InTech/ansible-playground.git
 Ansible requires to connect via SSH to the clients. That's why we need to export devcontainer's SSH public key into the client's containers.
 
 ```sh
-bash ./scripts/init-ansible-playground.sh
+bash ./.devcontainer/scripts/init-ansible-playground.sh
 ```
 
 This script...
@@ -42,7 +42,7 @@ Open the repository in vscode. Vscode should give you a hint, that it has detect
 
 > **This step will be executed automatically by starting the DevContainer**
 
-Starting the DevContainer for the first time will execute the script [customize-ansible-control.sh](./scripts/customize-ansible-control.sh). Feel free to modify to fit to your favorite tools and configs.
+Starting the DevContainer for the first time will execute the script [customize-ansible-control.sh](./.devcontainer/scripts/customize-ansible-control.sh). Feel free to modify to fit to your favorite tools and configs.
 
 ## Now you're ready to play
 
