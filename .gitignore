@@ -2,5 +2,11 @@
 .devcontainer/ssh-keys/server/id_rsa.pub
 .devcontainer/ssh-keys/server/known_hosts
 .devcontainer/ssh-keys/clients/authorized_keys
-inventory.y[a]ml
+collections/*
+group_vars/*
+host_vars/*
+inventory/*
+playbooks/*
+roles/*
 ansible.cfg
+inventory.yml
