@@ -35,7 +35,7 @@
 			"settings": {
 				"redhat.telemetry.enabled": false,
 				"ansible.validation.lint.path": "ansible-lint",
-				"ansible.ansible.path": "/usr/bin/ansible"
+				"ansible.ansible.path": "ansible"
 			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
