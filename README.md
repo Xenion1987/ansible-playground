@@ -12,7 +12,7 @@
 ### Clone this repository
 
 ```sh
-git clone https://github.com/Access-InTech/ansible-playground.git
+git clone https://github.com/Xenion1987/ansible-playground.git
 ```
 
 ## Start the playground
