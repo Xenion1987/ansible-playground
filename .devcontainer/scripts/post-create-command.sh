@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 WORKDIR="/workspaces/ansible-playground"
 
@@ -14,9 +14,10 @@ function install_basics() {
     iputils-ping \
     git \
     direnv \
-    python3-pip
+    python3-pip \
+    python3-venv
   sudo rm -rf /var/lib/apt/lists/*
-  python3 -m pip install --upgrade --user pip argcomplete ansible ansible-lint
+
   if [[ ! -f /usr/bin/python ]]; then
     sudo ln -s /usr/bin/python3 /usr/bin/python
   fi
@@ -73,6 +74,21 @@ au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
 autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab autoindent
 _EOF
 }
+create_ansible_venv() {
+  cd "${WORKDIR}" || exit 1
+  python3 -m venv "${WORKDIR}/.devcontainer/.venv-ansible"
+  s="source ${WORKDIR}/.devcontainer/.venv-ansible/bin/activate"
+  if ! grep -q "${s}" "${HOME}/.bashrc"; then
+    echo "${s}" | tee -a "${HOME}/.bashrc"
+  fi
+}
+activate_ansible_venv() {
+  cd $WORKDIR || exit 1
+  source ./.devcontainer/.venv-ansible/bin/activate
+}
+function install_ansible() {
+  python -m pip install --upgrade argcomplete ansible ansible-lint
+}
 function prepare_ansible_defaults() {
   if [[ ! -f ${WORKDIR}/inventory.yml ]]; then
     cp -a "${WORKDIR}/inventory.yml.example" "${WORKDIR}/inventory.yml"
@@ -91,6 +107,9 @@ function main() {
   install_basics
   generate_config_files
   create_vim_config
+  create_ansible_venv
+  activate_ansible_venv
+  install_ansible
   prepare_ansible_defaults
   test_initial_client_connection
 }
