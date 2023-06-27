@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 #########################################################
 # Call this script from the repository's root dir.
@@ -21,6 +21,10 @@ if [[ -n $o ]]; then
   docker image rm $(docker image ls -q "vcs-ansible-playground*")
 fi
 docker builder prune -f
+
+if [[ -d "./.devcontainer/.venv-ansible" ]]; then
+  rm -rf "./.devcontainer/.venv-ansible"
+fi
 
 o=$(find ./.devcontainer/ssh-keys -not \( -name "ssh-keys" -or -name "server" -or -name "clients" -or -name ".keep" \))
 if [[ -n $o ]]; then

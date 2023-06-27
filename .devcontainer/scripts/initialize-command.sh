@@ -1,4 +1,12 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
+
+DOCKER_VOLUME_NAME="devcontainer-history"
+
+if ! docker volume inspect "${DOCKER_VOLUME_NAME}" >/dev/null 2>&1; then
+  docker volume create "${DOCKER_VOLUME_NAME}"
+else
+  echo "INITIALIZE COMMAND :: Docker volume '${DOCKER_VOLUME_NAME}' already exists - no need to create."
+fi
 
 if [[ ! $(docker network ls -qf name=ansible-playground) =~ [0-9a-z]{12} ]]; then
   docker network create ansible-playground
@@ -6,7 +14,7 @@ fi
 build_images=()
 while read -r image; do
   if ! docker image ls "${image}" | grep -q "${image}"; then
-    build_images+=(${image})
+    build_images+=("${image}")
   fi
 done < <(awk '/image:/ {print $NF}' .devcontainer/docker-compose.yml)
 if [[ ${#build_images[@]} -gt 0 ]]; then
@@ -15,8 +23,8 @@ if [[ ${#build_images[@]} -gt 0 ]]; then
 fi
 echo "---------------- DOCKER IMAGES BUILT ---------------"
 
-if [[ ! -f ${PWD}/ssh-keys/clients/authorized_keys ]]; then
-  touch ${PWD}/.devcontainer/ssh-keys/clients/authorized_keys
+if [[ ! -f "${PWD}/ssh-keys/clients/authorized_keys" ]]; then
+  touch "${PWD}/.devcontainer/ssh-keys/clients/authorized_keys"
 fi
 
 docker compose -f .devcontainer/docker-compose.yml up -d
@@ -25,22 +33,22 @@ if ! find .devcontainer/ssh-keys -type f -name id_rsa | grep -q .; then
   echo "---------------- DEPLOY SSH KEYFILES ---------------"
   echo "Generate initial SSH keypair"
   docker run --rm --name tmp_ansible_init -it \
-    -v ${PWD}/.devcontainer/ssh-keys/clients/:/root/.ssh/clients \
-    -v ${PWD}/.devcontainer/ssh-keys/server/:/root/.ssh/server \
+    -v "${PWD}"/.devcontainer/ssh-keys/clients/:/root/.ssh/clients \
+    -v "${PWD}"/.devcontainer/ssh-keys/server/:/root/.ssh/server \
     ansible-client-debian \
     bash -c 'ssh-keygen -q -t rsa -b 4096 -f /root/.ssh/server/id_rsa -N "" -C "ansible-playground_$(date +%Y%m%d_%H%M%S)"<<<y >/dev/null'
 
   echo "Add 'authorized_keys' with root's public key for all clients"
   docker run --rm --name tmp_ansible_init -it \
-    -v ${PWD}/.devcontainer/ssh-keys/clients/:/root/.ssh/clients \
-    -v ${PWD}/.devcontainer/ssh-keys/server/:/root/.ssh/server \
+    -v "${PWD}"/.devcontainer/ssh-keys/clients/:/root/.ssh/clients \
+    -v "${PWD}"/.devcontainer/ssh-keys/server/:/root/.ssh/server \
     ansible-client-debian \
     bash -c 'cp /root/.ssh/server/id_rsa.pub /root/.ssh/clients/authorized_keys'
 
   echo "Fix permissions for ansible-control node"
   docker run --rm --name tmp_ansible_init -it \
-    -v ${PWD}/.devcontainer/ssh-keys/clients/:/root/.ssh/clients \
-    -v ${PWD}/.devcontainer/ssh-keys/server/:/root/.ssh/server \
+    -v "${PWD}"/.devcontainer/ssh-keys/clients/:/root/.ssh/clients \
+    -v "${PWD}"/.devcontainer/ssh-keys/server/:/root/.ssh/server \
     ansible-client-debian \
     bash -c 'chown -R 1000:1000 /root/.ssh/'
 fi
