@@ -3,23 +3,29 @@
 WORKDIR="/workspaces/ansible-playground"
 
 function install_basics() {
-  sudo apt update
   export DEBIAN_FRONTEND=noninteractive
+  sudo apt update && sudo apt -y dist-upgrade
   sudo apt install -y --no-install-recommends \
-    dialog \
-    apt-utils \
-    sudo \
-    vim \
-    curl \
+    bash-completion \
     iputils-ping \
-    git \
     direnv \
     python3-pip \
-    python3-venv
+    python3-venv \
+    python3-argcomplete
   sudo rm -rf /var/lib/apt/lists/*
+  sudo apt -y clean
+  sudo apt -y autoclean
+  sudo apt -y autoremove
 
   if [[ ! -f /usr/bin/python ]]; then
     sudo ln -s /usr/bin/python3 /usr/bin/python
+  fi
+}
+function setup_python_argcomplete() {
+  if type -p activate-global-python-argcomplete &>/dev/null; then
+    sudo activate-global-python-argcomplete --dest /etc/bash_completion.d/
+  elif type -p activate-global-python-argcomplete3 &>/dev/null; then
+    sudo activate-global-python-argcomplete3 --dest /etc/bash_completion.d/
   fi
 }
 function generate_config_files() {
@@ -27,8 +33,10 @@ function generate_config_files() {
     return 0
   fi
   cat <<_EOF >>"${HOME}/.bashrc"
-export LS_OPTIONS='--color=auto'
-eval "\$(dircolors -b)"
+# export LS_OPTIONS='--color=auto'
+# eval "\$(dircolors -b)"
+
+
 
 files=(.bash_aliases .functions .paths)
 for file in "\${files[@]}"; do
@@ -38,9 +46,14 @@ for file in "\${files[@]}"; do
         source "\${HOME}/\${file}"
     fi
 done
-if [[ -f \${HOME}/.bash_completion.d/python-argcomplete ]]; then
-    source \${HOME}/.bash_completion.d/python-argcomplete
-fi
+COMPLETION_DIRS=(/etc/bash_completion.d/ \${HOME}/.bash_completion.d/)
+for COMPLETION_DIR in "\${COMPLETION_DIRS[@]}"; do
+  if [[ -f "\${COMPLETION_DIR}" ]]; then
+    for f in \$(ls -1qA "\${COMPLETION_DIR}"); do    
+      source "\${COMPLETION_DIR}/\${f}"
+    done
+  fi
+done
 eval "\$(direnv hook bash)"
 _EOF
   cat <<_EOF >"${HOME}/.bash_aliases"
@@ -87,7 +100,7 @@ activate_ansible_venv() {
   source ./.devcontainer/.venv-ansible/bin/activate
 }
 function install_ansible() {
-  python -m pip install --upgrade argcomplete ansible ansible-lint
+  python -m pip install --upgrade ansible ansible-lint 
 }
 function prepare_ansible_defaults() {
   if [[ ! -f ${WORKDIR}/inventory.yml ]]; then
@@ -98,15 +111,16 @@ function prepare_ansible_defaults() {
   fi
   mkdir -p "${HOME}/.ansible/log/"
   touch "${HOME}/.ansible/log/ansible.log"
-  activate-global-python-argcomplete --user
 }
 function test_initial_client_connection() {
-  ansible all -o -m ping
+  # ansible all -o -m ping
+  ansible-playbook playbooks/ping_clients.yml
 }
 function main() {
   install_basics
+  setup_python_argcomplete
   generate_config_files
-  create_vim_config
+  # create_vim_config
   create_ansible_venv
   activate_ansible_venv
   install_ansible
