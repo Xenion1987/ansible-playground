@@ -1,0 +1,3 @@
+{
+    "ansible.python.interpreterPath": "/workspaces/ansible-playground/.devcontainer/.venv-ansible/bin/python"
+}

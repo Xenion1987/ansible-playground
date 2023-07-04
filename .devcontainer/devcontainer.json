@@ -1,9 +1,9 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	"name": "Debian-11-Ansible",
+	"name": "Ansible-Debian-11",
 	"initializeCommand": "bash ./.devcontainer/scripts/initialize-command.sh",
-	"image": "mcr.microsoft.com/devcontainers/python:3",
+	"image": "mcr.microsoft.com/devcontainers/python:3-bullseye",
 	"runArgs": [
 		"--name=ansible-playground-control",
 		"--hostname=ansible-control",
@@ -31,13 +31,31 @@
 				"git.confirmSync": false,
 				"redhat.telemetry.enabled": false,
 				"ansible.validation.lint.path": "ansible-lint",
-				"ansible.ansible.path": "ansible"
+				"ansible.ansible.path": "ansible",
+				"files.associations": {
+					"*.j2": "ansible-jinja",
+					"**/defaults/**/*.y*ml": "ansible-jinja",
+					"**/group_vars/**/*.y*ml": "ansible",
+					"**/host_vars/**/*.y*ml": "ansible",
+					"**/vars/**/*.y*ml": "ansible",
+					"**/tasks/**/*.y*ml": "ansible",
+					"**/handlers/*.y*ml": "ansible",
+					"**/meta/*.y*ml": "ansible",
+					"**/roles/**/*.y*ml": "ansible",
+					"**/playbooks/**/*.y*ml": "ansible",
+					"**/hosts": "properties",
+					"**/hosts.y*ml": "ansible",
+					"**/inventory/**": "properties",
+					"**/inventory/**/*.y*ml": "ansible",
+					"ansible.cfg": "properties"
+				}
 			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"sleistner.vscode-fileutils",
 				"redhat.ansible",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+				"esbenp.prettier-vscode"
 			]
 		}
 	},
