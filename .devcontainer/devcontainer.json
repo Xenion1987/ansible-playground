@@ -9,6 +9,7 @@
 		"--hostname=ansible-control",
 		"--network=ansible-playground"
 	],
+	"containerEnv": { "TZ": "Europe/Berlin" },
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/sshd:1": {}
@@ -30,16 +31,18 @@
 				"git.pullTags": false,
 				"git.confirmSync": false,
 				"redhat.telemetry.enabled": false,
+				"python.terminal.activateEnvironment": true,
 				"ansible.validation.lint.path": "ansible-lint",
 				"ansible.ansible.path": "ansible",
-				"files.associations": {
-					"*.j2": "ansible-jinja",
-					"**/defaults/**/*.y*ml": "ansible-jinja",
-					"**/group_vars/**/*.y*ml": "ansible",
-					"**/host_vars/**/*.y*ml": "ansible",
-					"**/vars/**/*.y*ml": "ansible",
-					"**/tasks/**/*.y*ml": "ansible",
-					"**/handlers/*.y*ml": "ansible",
+				"ansible.python.interpreterPath": ".devcontainer/.venv-ansible/bin/python",			
+			"files.associations": {
+				"*.j2": "ansible-jinja",
+				"**/defaults/**/*.y*ml": "ansible",
+				"**/group_vars/**/*.y*ml": "ansible",
+				"**/host_vars/**/*.y*ml": "ansible",
+				"**/vars/**/*.y*ml": "ansible",
+				"**/tasks/**/*.y*ml": "ansible",
+				"**/handlers/*.y*ml": "ansible",
 					"**/meta/*.y*ml": "ansible",
 					"**/roles/**/*.y*ml": "ansible",
 					"**/playbooks/**/*.y*ml": "ansible",
@@ -47,7 +50,9 @@
 					"**/hosts.y*ml": "ansible",
 					"**/inventory/**": "properties",
 					"**/inventory/**/*.y*ml": "ansible",
-					"ansible.cfg": "properties"
+					"ansible.cfg": "properties",
+					".ansible-lint": "yaml",
+					".yamllint": "yaml"
 				}
 			},
 			// Add the IDs of extensions you want installed when the container is created.
