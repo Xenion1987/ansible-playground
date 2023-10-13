@@ -1,7 +1,8 @@
 ---
-- name: Play to ping all clients
+- name: Ping all clients
   hosts: all
   gather_facts: false
+
   tasks:
-    - name: Ping all clients
+    - name: Ping clients
       ansible.builtin.ping:
