@@ -6,8 +6,10 @@ RUN dnf update -y && \
     curl \
     iproute \
     python3 \
+    tzdata \
     openssh-clients \
     openssh-server \
     && dnf clean all
+ENV TZ='Europe/Berlin'
 RUN mkdir -p /run/sshd && ssh-keygen -A
 CMD ["/usr/sbin/sshd", "-D"]

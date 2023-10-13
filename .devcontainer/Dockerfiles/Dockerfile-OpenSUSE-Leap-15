@@ -8,5 +8,6 @@ RUN zypper update -y && \
     openssh-clients \
     openssh-server \
     && zypper clean -a
+ENV TZ='Europe/Berlin'
 RUN mkdir -p /run/sshd && ssh-keygen -A
 CMD ["/usr/sbin/sshd", "-D"]
