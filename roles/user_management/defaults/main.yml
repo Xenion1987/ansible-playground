@@ -1,0 +1,11 @@
+---
+# defaults file for roles/user_management
+user_management_default_sudo_mode: sudo
+user_management_default_shell: /bin/bash
+user_management_default_home_root: /home
+
+user_management_custom_home_root: /home/custom-home-root
+user_management_custom_primary_group: custom-primary-group
+user_management_custom_secondary_groups:
+  - custom-secondary-group
+user_management_global_ssh_from: "*"
