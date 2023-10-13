@@ -1,0 +1,27 @@
+---
+# vars file for roles/user_management
+user_management_users:
+  # - name: str               # required
+  #   state: str              # required
+  #   home_create: bool       # optional - defaults to 'true'
+  #   home_path: str          # optional - defaults to 'user_management_default_home_root'
+  #   primary_group: str      # optional - skipped if not defined
+  #   secondary_groups: str   # optional - skipped if not defined
+  #   groups_append: bool     # optional - defaults to 'true'
+  #   shell: str              # optional - defaults to '/bin/bash'
+  #   custom_ssh_from: str    # optional - Comma-separated list of patterns
+
+  # Productive extended example
+  - name: john.doe
+    state: present
+    home_create: true
+    home_path: "{{ user_management_custom_home_root }}"
+    primary_group: "{{ user_management_custom_primary_group }}"
+    secondary_groups: "{{ user_management_custom_secondary_groups }}"
+    groups_append: true
+    shell: /bin/bash
+    custom_ssh_from: 0.0.0.0
+
+  # Productive minimal example
+  - name: jane.doe
+    state: present

@@ -1,0 +1,51 @@
+---
+# tasks file for roles/user_management
+
+- name: Ensure 'sudo' is installed
+  ansible.builtin.package:
+    name: sudo
+    state: present
+  when: user_management_default_sudo_mode == "sudo"
+
+- name: "Ensure company primary group is created: {{ user_management_custom_primary_group }}"
+  ansible.builtin.group:
+    name: "{{ user_management_custom_primary_group | default(omit) }}"
+    state: present
+
+- name: Ensure company secondary groups are created
+  ansible.builtin.group:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ user_management_custom_secondary_groups | default(omit) }}"
+
+- name: Ensure home directories existing
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ user_management_default_home_root }}"
+    - "{{ user_management_custom_home_root }}"
+
+- name: Manage user_management_users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    # Use user_management_users.home_create if set, else set 'true'
+    create_home: "{{ item.home_create | default(true) }}"
+    # Use user_management_users.home_create if set, else create User's home directory as defined in defaults file
+    home: "{{ item.home_path | default(user_management_default_home_root) }}/{{ item.name }}"
+    # Use user_management_users.primary_group if defined, else use user_management_users.name as primary group
+    group: "{{ item.primary_group | default(omit) }}"
+    # Use user_management_users.secondary_groups if defined, else skip modifying secondary groups
+    groups: "{{ item.secondary_groups | default(omit) }}"
+    # Use user_management_users.groups_append if defined, else append secondary groups if user_management_users.secondary_groups are defined
+    append: "{{ item.groups_append | default(true) if item.secondary_groups | default else omit }}"
+    # Use user_management_users.shell if defined, else use default shell as defined in defaults file
+    shell: "{{ item.shell | default(user_management_default_shell) }}"
+  loop: "{{ user_management_users }}"
+
+- name: Include tasks Manage SSH Pubkeys
+  ansible.builtin.include_tasks:
+    file: manage_ssh_pubkeys.yml
+  loop: "{{ user_management_users }}"
