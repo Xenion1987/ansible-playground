@@ -8,8 +8,10 @@ RUN apt update && \
     sudo \
     curl \
     iproute2 \
+    tzdata \
     python3 \
     openssh-server \
     && rm -rf /var/lib/apt/lists/*
+ENV TZ='Europe/Berlin'
 RUN mkdir -p /run/sshd && ssh-keygen -A
 CMD ["/usr/sbin/sshd", "-D"]
