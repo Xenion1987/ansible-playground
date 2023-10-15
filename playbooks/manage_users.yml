@@ -1,0 +1,9 @@
+---
+- name: Play for testing stuff
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Include roles user_management
+      ansible.builtin.include_role:
+        name: user_management
