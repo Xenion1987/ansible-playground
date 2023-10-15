@@ -100,7 +100,7 @@ activate_ansible_venv() {
   source ./.devcontainer/.venv-ansible/bin/activate
 }
 function install_ansible() {
-  python -m pip install --upgrade ansible ansible-lint 
+  python -m pip install --upgrade ansible ansible-lint
 }
 function prepare_ansible_defaults() {
   if [[ ! -f ${WORKDIR}/inventory.yml ]]; then
@@ -116,6 +116,9 @@ function test_initial_client_connection() {
   # ansible all -o -m ping
   ansible-playbook playbooks/ping_clients.yml
 }
+function install_pre_commit() {
+  .devcontainer/scripts/install-pre-commit.sh
+}
 function main() {
   install_basics
   setup_python_argcomplete
@@ -126,5 +129,6 @@ function main() {
   install_ansible
   prepare_ansible_defaults
   test_initial_client_connection
+  install_pre_commit
 }
 main
