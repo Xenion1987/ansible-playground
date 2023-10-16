@@ -34,7 +34,7 @@
 				"python.terminal.activateEnvironment": true,
 				"ansible.validation.lint.path": "ansible-lint",
 				"ansible.ansible.path": "ansible",
-				"ansible.python.interpreterPath": ".devcontainer/.venv-ansible/bin/python",			
+				"ansible.python.interpreterPath": ".devcontainer/.venv-ansible/bin/python",
 			"files.associations": {
 				"*.j2": "ansible-jinja",
 				"**/defaults/**/*.y*ml": "ansible",
