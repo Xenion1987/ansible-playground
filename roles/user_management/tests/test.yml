@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: "Test: role user_management"
+  hosts: localhost
   remote_user: root
   roles:
-    - roles/user_management
+    - user_management

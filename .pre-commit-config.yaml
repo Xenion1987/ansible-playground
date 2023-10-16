@@ -5,18 +5,22 @@ repos:
       - id: trailing-whitespace
         name: Cleanup trailing whitespaces
         args: [--markdown-linebreak-ext=md]
+  - repo: https://github.com/ansible-community/ansible-lint
+    rev: v6.20.3
+    hooks:
+      - id: ansible-lint
+        name: Check Ansible files
+        args: ["--exclude", ".devcontainer/", "--exclude", ".git/"]
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.9.0.6
     hooks:
       - id: shellcheck
         name: Check '*.sh' files
         files: ^(.*)\.sh$
-        exclude: \.venv*$
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.7.0-1
     hooks:
       - id: shfmt
         name: Format '*.sh' files
         files: ^(.*)\.sh$
-        exclude: \.venv*$
         args: [-i, "2", -w]
