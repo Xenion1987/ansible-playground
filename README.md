@@ -1,5 +1,7 @@
 # ansible-playground
 
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+
 ## Installing
 
 ### Install requirements
@@ -26,3 +28,9 @@ Open the repository in vscode. Vscode should give you a hint, that it has detect
 > **This step will be executed automatically by starting the DevContainer**
 
 Starting the DevContainer will execute the script [post-create-command.sh](./.devcontainer/scripts/post-create-command.sh). Feel free to modify it to fit to your favorite tools and configs.
+
+## Contributing
+
+This repository is [`pre-commit`](https://pre-commit.com/) enabled. Before commiting, all changes will be checked by pre-commit-hooks defined in [.pre-commit-config.yaml](./.pre-commit-config.yaml). [`pre-commit`](https://pre-commit.com/) will be installed inside the devcontainer.
+
+Before doing a `git commit`, you should run `pre-commit run --all-files` to run checks and fix mentioned warnings/errors.
