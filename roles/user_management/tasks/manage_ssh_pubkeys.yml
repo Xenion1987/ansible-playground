@@ -3,7 +3,28 @@
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
     state: present
+    key_options: |-
+      {% if user_management_global_ssh_from is defined and user_management_global_ssh_from %}
+      {% set from_options_global = user_management_global_ssh_from %}
+      {% endif %}
+      {% if item.custom_ssh_from is defined and item.custom_ssh_from %}
+      {% set from_options_custom = item.custom_ssh_from %}
+      {% endif %}
+      {% if from_options_global is defined %}
+      {% if from_options_custom is defined -%}
+      {% if '*' == from_options_global -%}
+      from="{{ from_options_custom }}"
+      {%- else -%}
+      from="{{ from_options_global + ',' + from_options_custom }}"
+      {%- endif %}
+      {%- else -%}
+      from="{{ from_options_global }}"
+      {%- endif %}
+      {% elif from_options_custom is defined -%}
+      from="{{ from_options_custom }}"
+      {%- else -%}
+      from="*"
+      {%- endif %}
     key: "{{ lookup('file', item.name + '.pubkey', errors='ignore') | default('') }}"
     exclusive: true
-    key_options: "{{ 'from=' + (user_management_global_ssh_from + (',' + item.custom_ssh_from if item.custom_ssh_from | default('') else '')) if user_management_global_ssh_from or (item.custom_ssh_from | default('')) }}"
   when: item.state == 'present'

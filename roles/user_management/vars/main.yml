@@ -20,7 +20,6 @@ user_management_users:
     secondary_groups: "{{ user_management_custom_secondary_groups }}"
     groups_append: true
     shell: /bin/bash
-    custom_ssh_from: 0.0.0.0
 
   # Productive minimal example
   - name: jane.doe
