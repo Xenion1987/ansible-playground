@@ -2,5 +2,6 @@
 - name: "Test: role user_management"
   hosts: localhost
   remote_user: root
+  become: true
   roles:
     - user_management
