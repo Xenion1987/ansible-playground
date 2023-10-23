@@ -1,6 +1,6 @@
 # ansible-playground
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit) ![CI](https://github.com/Xenion1987/ansible-playground/actions/workflows/pre-commit.yml/badge.svg)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit) ![pre-commit](https://github.com/Xenion1987/ansible-playground/actions/workflows/pre-commit.yml/badge.svg) ![ansible-tests](https://github.com/Xenion1987/ansible-playground/actions/workflows/ansible-tests.yml/badge.svg)
 
 ## Installing
 
