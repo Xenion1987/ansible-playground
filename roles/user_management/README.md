@@ -1,31 +1,58 @@
-# Role Name
+# Role: `user_management`
 
-A brief description of the role goes here.
+Manage users and their SSH public key enrollment via Ansible.
 
 ## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Ansible >=2.10
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### `defaults/main.yml`
+
+| Name                                       | Type  | Default | Description |
+| ------------------------------------------ | ----- | ------- | ----------- |
+| `user_management_default_sudo_mode`        | `str` |         |             |
+| `user_management_default_shell`            | `str` |         |             |
+| `user_management_default_home_root`        | `str` |         |             |
+| `user_management_default_primary_group`    | `str` |         |             |
+| `user_management_default_secondary_groups` | `str` |         |             |
+| `user_management_default_ssh_from`         | `str` |         |             |
+
+### `vars/main.yml`
+
+| Name                                       | Type   | Default                         | Description |
+| ------------------------------------------ | ------ | ------------------------------- | ----------- |
+| `user_management_users`                    | `list` |                                 |             |
+| `user_management_users.name`               | `str`  |                                 |             |
+| `user_management_users.state`              | `str`  |                                 |             |
+| `user_management_users.userdel_remove`     | `bool` | `false`                         |             |
+| `user_management_users.userdel_force`      | `bool` | `false`                         |             |
+| `user_management_users.home_create`        | `bool` | `true`                          |             |
+| `user_management_users.absolute_home_path` | `str`  |                                 |             |
+| `user_management_users.home_move`          | `bool` | `false`                         |             |
+| `user_management_users.primary_group`      | `str`  | `user_management_users.name`    |             |
+| `user_management_users.secondary_groups`   | `str`  | `user_management_users.name`    |             |
+| `user_management_users.groups_append`      | `bool` | `true`                          |             |
+| `user_management_users.shell`              | `str`  | `user_management_default_shell` |             |
+| `user_management_users.custom_ssh_from`    | `str`  |                                 |             |
 
 ## Dependencies
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- ansible.posix
 
 ## Example Playbook
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for user_management_users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-## License
-
-BSD
+```yaml
+---
+- name: Manage SSH user via Ansible
+  hosts: all
+  tasks:
+    - name: Include role 'user_management'
+      include_role:
+        name: user_management
+```
 
 ## Author Information
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+[Xenion1987](https://github.com/Xenion1987)
