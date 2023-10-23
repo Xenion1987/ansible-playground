@@ -9,21 +9,22 @@
 
 - name: "Ensure custom primary group is created"
   ansible.builtin.group:
-    name: "{{ item }}"
+    name: "{{ user_management_default_primary_group }}"
     state: present
-  loop: "{{ user_management_custom_primary_group | default('[]') }}"
+  when: user_management_default_primary_group is defined and user_management_default_primary_group
 
 - name: Ensure custom secondary groups are created
   ansible.builtin.group:
-    name: "{{ item }}"
+    name: "{{ user_management_custom_secondary_groups }}"
     state: present
-  loop: "{{ user_management_custom_secondary_groups | default('[]') }}"
+  when: user_management_custom_secondary_groups is defined and user_management_custom_secondary_groups
 
 - name: Ensure home directory exists
   ansible.builtin.file:
     path: "{{ user_management_default_home_root }}"
     state: directory
     mode: "0755"
+  when: user_management_default_home_root is defined and user_management_default_home_root
 
 - name: Include tasks 'manage_user'
   ansible.builtin.include_tasks:
