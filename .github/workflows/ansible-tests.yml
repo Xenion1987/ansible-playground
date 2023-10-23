@@ -1,0 +1,24 @@
+name: ansible-tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  ansible-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup Python3
+      uses: actions/setup-python@v3
+    - name: Setup Python3
+      shell: bash
+      run: |
+        if command -v ansible &>/dev/null; then
+          ansible-playbook roles/user_management/tests/test.yml
+        else
+          echo "Ansible seems not to be installed or in 'PATH'"
+          exit 1
+        fi
