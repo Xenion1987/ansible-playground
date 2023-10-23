@@ -16,9 +16,11 @@ jobs:
     - name: Setup Python3
       shell: bash
       run: |
-        if command -v ansible &>/dev/null; then
-          ansible-playbook roles/user_management/tests/test.yml
-        else
+        if ! command -v ansible &>/dev/null; then
           echo "Ansible seems not to be installed or in 'PATH'"
           exit 1
         fi
+        if ! cp ansible.cfg.example ansible.cfg; then
+          exit 1
+        fi
+        ansible-playbook roles/user_management/tests/test.yml
