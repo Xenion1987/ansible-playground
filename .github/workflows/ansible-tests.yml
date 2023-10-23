@@ -13,14 +13,19 @@ jobs:
       uses: actions/checkout@v3
     - name: Setup Python3
       uses: actions/setup-python@v3
-    - name: Setup Python3
+    - name: Test roles
       shell: bash
       run: |
+        roles=(user_management)
         if ! command -v ansible &>/dev/null; then
-          echo "Ansible seems not to be installed or in 'PATH'"
+          echo "Ansible seems not to be installed or in '$PATH'"
           exit 1
         fi
         if ! cp ansible.cfg.example ansible.cfg; then
           exit 1
         fi
-        ansible-playbook roles/user_management/tests/test.yml
+        for role in ${roles[@]}; do
+          if ! ansible-playbook roles/${role}/tests/test.yml; then
+            exit 2
+          fi
+        done
