@@ -11,7 +11,7 @@ user_management_users:
   #   primary_group: str      # optional - skipped if not defined
   #   secondary_groups: str   # optional - skipped if not defined
   #   groups_append: bool     # optional - defaults to 'true'
-  #   shell: str              # optional - defaults to '{{user_management_default_shell}}'
+  #   shell: str              # optional - defaults to '{{ user_management_default_shell }}'
   #   custom_ssh_from: str    # optional - Comma-separated list of patterns
 
   # Productive extended example
