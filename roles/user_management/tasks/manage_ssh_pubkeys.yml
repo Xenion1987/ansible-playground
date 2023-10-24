@@ -4,27 +4,12 @@
     user: "{{ item.name }}"
     state: present
     key_options: |-
-      {% if user_management_default_ssh_from is defined and user_management_default_ssh_from -%}
-        {% set from_options_global = user_management_default_ssh_from -%}
-      {% endif -%}
-      {% if item.custom_ssh_from is defined and item.custom_ssh_from -%}
-        {% set from_options_custom = item.custom_ssh_from -%}
-      {% endif -%}
-      {% if from_options_global is defined -%}
-        {% if from_options_custom is defined -%}
-          {% if '*' == from_options_global -%}
-            from="{{ from_options_custom }}"
-          {%- else -%}
-            from="{{ from_options_global + ',' + from_options_custom }}"
-          {%- endif -%}
-        {% else -%}
-          from="{{ from_options_global }}"
-        {%- endif -%}
-      {% elif from_options_custom is defined -%}
-        from="{{ from_options_custom }}"
-      {%- else -%}
-        from="*"
-      {%- endif -%}
+      {%- set from_options_global = user_management_default_ssh_from | default('') -%}
+      {%- set from_options_custom_item = item.custom_ssh_from | default('') -%}
+      {%- set from_options_custom_host = custom_ssh_from | default('') -%}
+      {%- set from_options_custom = from_options_custom_item + ',' + from_options_custom_host if from_options_custom_item and from_options_custom_host else from_options_custom_item if from_options_custom_item else from_options_custom_host -%}
+      {%- set from_options = from_options_global + (',' + from_options_custom) if from_options_global != '*' else from_options_custom -%}
+      from="{% if from_options %}{{ from_options | trim }}{% else %}*{% endif %}"
     key: "{{ lookup('file', item.name + '.pubkey', errors='ignore') | default('') }}"
     exclusive: true
   when: item.state == 'present'

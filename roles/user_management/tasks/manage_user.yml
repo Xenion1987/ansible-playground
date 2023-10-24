@@ -13,7 +13,7 @@
     # If set to true when used with 'home:', attempt to move the user's old home directory to the specified directory if it isn't there already and the old home exists.
     move_home: "{{ item.home_move | default(omit) }}"
     # Use user_management_users.primary_group if defined, else use user_management_users.name as primary group
-    group: "{{ item.primary_group | default(omit) }}"
+    group: "{{ item.primary_group if item.primary_group is defined and item.primary_group else omit }}"
     # Use user_management_users.secondary_groups if defined, else skip modifying secondary groups
     groups: "{{ item.secondary_groups | default(omit) }}"
     # Use user_management_users.groups_append if defined, else append secondary groups if user_management_users.secondary_groups are defined

@@ -1,0 +1,21 @@
+## Recommended Options
+ServerAliveInterval 60
+ServerAliveCountMax 2
+IdentitiesOnly yes
+## Optional Options
+StrictHostKeyChecking no
+UserKnownHostsFile /dev/null
+LogLevel ERROR
+
+Host *debian
+    HostName ansible-client-debian
+    User root
+Host *ubuntu
+    HostName ansible-client-ubuntu
+    User root
+Host *alma
+    HostName ansible-client-alma
+    User root
+Host *suse
+    HostName ansible-client-suse
+    User root

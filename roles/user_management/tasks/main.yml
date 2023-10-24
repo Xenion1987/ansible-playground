@@ -15,9 +15,10 @@
 
 - name: Ensure custom secondary groups are created
   ansible.builtin.group:
-    name: "{{ user_management_custom_secondary_groups }}"
+    name: "{{ item }}"
     state: present
-  when: user_management_custom_secondary_groups is defined and user_management_custom_secondary_groups
+  loop: "{{ user_management_default_secondary_groups }}"
+  when: user_management_default_secondary_groups is defined and user_management_default_secondary_groups
 
 - name: Ensure home directory exists
   ansible.builtin.file:
