@@ -3,6 +3,6 @@
 user_management_default_sudo_mode: sudo
 user_management_default_shell: /bin/bash
 user_management_default_home_root: /home/custom-home-root
-user_management_default_primary_group: custom-primary-group
+user_management_default_primary_group: Null
 user_management_default_secondary_groups: []
 user_management_default_ssh_from: "*"

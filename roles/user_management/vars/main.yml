@@ -19,14 +19,16 @@ user_management_users:
     state: present
     home_create: true
     absolute_home_path: "{{ user_management_default_home_root }}/john.doe"
-    primary_group: "{{ user_management_default_primary_group }}"
-    secondary_groups: "{{ user_management_default_secondary_groups }}"
+    # primary_group: "{{ user_management_default_primary_group }}"
+    secondary_groups: ""
     groups_append: true
     shell: /bin/bash
 
   # Productive minimal example
   - name: jane.doe
     state: present
+    primary_group: "{{ user_management_default_primary_group }}"
+    secondary_groups: "{{ user_management_default_secondary_groups }}"
 
   # Productive absent example
   - name: james.doe

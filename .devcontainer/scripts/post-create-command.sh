@@ -33,12 +33,10 @@ function generate_config_files() {
     return 0
   fi
   cat <<_EOF >>"${HOME}/.bashrc"
-# export LS_OPTIONS='--color=auto'
-# eval "\$(dircolors -b)"
-
-
-
-files=(.bash_aliases .functions .paths)
+########################################
+###### ADDED BY 'post-create-command.sh'
+########################################
+files=(.aliases .functions .paths)
 for file in "\${files[@]}"; do
     if [[ ! -f "\${HOME}/\${file}" ]]; then
         touch "\${HOME}/\${file}"
@@ -55,8 +53,15 @@ for COMPLETION_DIR in "\${COMPLETION_DIRS[@]}"; do
   fi
 done
 eval "\$(direnv hook bash)"
+########################################
 _EOF
-  cat <<_EOF >"${HOME}/.bash_aliases"
+
+  files=(.aliases .functions .paths)
+  for file in "${files[@]}"; do
+    touch "${HOME}/${file}"
+  done
+
+  cat <<_EOF >"${HOME}/.aliases"
 alias ls='ls \$LS_OPTIONS'
 alias ll='ls -l'
 alias la='ls -lAh'
@@ -64,10 +69,6 @@ alias lt='ls -ltrh'
 alias l1='ls -1'
 alias src='. \${HOME}/.bashrc'
 _EOF
-  files=(.bash_aliases .functions .paths)
-  for file in "${files[@]}"; do
-    touch "${HOME}/${file}"
-  done
 
   EXPAND_PATHS=("${HOME}/.local/bin")
   for EXPAND_PATH in "${EXPAND_PATHS[@]}"; do
@@ -105,9 +106,6 @@ function install_ansible() {
   python -m pip install --upgrade ansible ansible-lint
 }
 function prepare_ansible_defaults() {
-  if [[ ! -f ${WORKDIR}/inventory.yml ]]; then
-    cp -a "${WORKDIR}/inventory.yml.example" "${WORKDIR}/inventory.yml"
-  fi
   if [[ ! -f ${WORKDIR}/ansible.cfg ]]; then
     cp -a "${WORKDIR}/ansible.cfg.example" "${WORKDIR}/ansible.cfg"
   fi
@@ -118,9 +116,6 @@ function test_initial_client_connection() {
   # ansible all -o -m ping
   ansible-playbook playbooks/ping_clients.yml
 }
-# function install_pre_commit() {
-#   .devcontainer/scripts/install-pre-commit.sh
-# }
 command_exists() {
   # Function to check if a command exists
   command -v "$1" >/dev/null 2>&1
@@ -175,7 +170,6 @@ install_pre_commit() {
 }
 activate_pre_commit() {
   pre-commit install
-  pre-commit autoupdate
 }
 function main() {
   install_basics

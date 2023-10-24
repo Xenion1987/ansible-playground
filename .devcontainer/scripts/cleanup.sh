@@ -26,7 +26,7 @@ if [[ -d "./.devcontainer/.venv-ansible" ]]; then
   rm -rf "./.devcontainer/.venv-ansible"
 fi
 
-o=$(find ./.devcontainer/ssh-keys -not \( -name "ssh-keys" -or -name "server" -or -name "clients" -or -name ".keep" \))
+o=$(find ./.devcontainer/ssh-keys -not \( -name "ssh-keys" -or -name "server" -or -name "clients" -or -name ".keep" -or -name "config" \))
 if [[ -n $o ]]; then
   echo "${o}"
   echo "This script will delete all files listed above."
@@ -34,7 +34,7 @@ if [[ -n $o ]]; then
   read -r -n1 yn
   case ${yn} in
   y | Y | j | J)
-    find ./.devcontainer/ssh-keys -not \( -name "ssh-keys" -or -name "server" -or -name "clients" -or -name ".keep" \) -delete
+    find ./.devcontainer/ssh-keys -not \( -name "ssh-keys" -or -name "server" -or -name "clients" -or -name ".keep" -or -name "config" \) -delete
     echo
     echo "done"
     ;;
