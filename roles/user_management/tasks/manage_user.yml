@@ -2,7 +2,7 @@
   ansible.builtin.user:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-    # This only affects 'state=absent', it attempts to remove directories associated with the user
+    # This only affects 'state=absent', it attempts to remove directories associated with the user.
     remove: "{{ item.userdel_remove | default(false) }}"
     # This only affects 'state=absent', it forces removal of the user and associated directories on supported platforms.
     force: "{{ item.userdel_force | default(false) }}"
