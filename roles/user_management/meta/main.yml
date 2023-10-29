@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: https://github.com/Xenion1987
   description: Manage user and ssh public keys in linux hosts

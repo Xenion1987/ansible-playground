@@ -1,3 +1,4 @@
+---
 - name: "Manage user {{ item.name }}"
   ansible.builtin.user:
     name: "{{ item.name }}"
