@@ -10,14 +10,15 @@ Manage users and their SSH public key enrollment via Ansible.
 
 ### `defaults/main.yml`
 
-| Name                                       | Type  | Default | Description                                                                                                                                             |
-| ------------------------------------------ | ----- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `user_management_default_sudo_mode`        | `str` |         | Installs `sudo` if set to `sudo`.                                                                                                                       |
-| `user_management_default_shell`            | `str` |         | Default Shell to set per user to create. May be referenced in user's variables.                                                                         |
-| `user_management_default_home_root`        | `str` |         | Custom `$HOME` root path. May be referenced in user's variables.                                                                                        |
-| `user_management_default_primary_group`    | `str` |         | Custom primary user group. May be referenced in user's variables.                                                                                       |
-| `user_management_default_secondary_groups` | `str` |         | Custom secondary user groups (comma-seperated). May be referenced in user's variables.                                                                  |
-| `user_management_default_ssh_from`         | `str` | `"*"`   | Default, global `from=""` value added to `authorized_keys` for each user which has a `{{user_management_users.name}}.pubkey` file in [files](./files/). |
+| Name                                                  | Type   | Default | Description                                                                                                                                             |
+| ----------------------------------------------------- | ------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user_management_default_sudo_mode`                   | `str`  |         | Installs `sudo` if set to `sudo`.                                                                                                                       |
+| `user_management_default_shell`                       | `str`  |         | Default Shell to set per user to create. May be referenced in user's variables.                                                                         |
+| `user_management_default_home_root`                   | `str`  |         | Custom `$HOME` root path. May be referenced in user's variables.                                                                                        |
+| `user_management_default_primary_group`               | `str`  |         | Custom primary user group. May be referenced in user's variables.                                                                                       |
+| `user_management_default_secondary_groups`            | `str`  |         | Custom secondary user groups (comma-seperated). May be referenced in user's variables.                                                                  |
+| `user_management_default_ssh_from`                    | `str`  | `"*"`   | Default, global `from=""` value added to `authorized_keys` for each user which has a `{{user_management_users.name}}.pubkey` file in [files](./files/). |
+| `user_management_create_custom_primary_group_sudoers` | `bool` | `false` | Creates one sudoers file to allow `ALL=(ALL:ALL) ALL` for `user_management_default_primary_group`.                                                      |
 
 ### `vars/main.yml`
 

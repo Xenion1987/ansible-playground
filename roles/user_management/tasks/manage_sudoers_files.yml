@@ -1,0 +1,8 @@
+---
+- name: Manage sudoers file for {{ user_management_custom_primary_group }}
+  community.general.sudoers:
+    name: "{{ user_management_custom_primary_group }}"
+    user: "%{{ user_management_custom_primary_group }}"
+    commands: "ALL"
+    state: present
+    validation: detect
