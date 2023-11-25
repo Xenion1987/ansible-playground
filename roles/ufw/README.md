@@ -3,6 +3,8 @@
 Manage firewall rules via 'Uncomplicated FireWall (UFW).  
 Inspired by 'Ansible weareinteractive.ufw role'.
 
+> **IMPORTANT** | This role won't work in docker containers!
+
 ## Requirements
 
 - Ansible >=2.10
