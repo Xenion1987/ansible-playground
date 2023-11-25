@@ -4,7 +4,7 @@ services:
   ansible-client-debian:
     build:
       context: ./Dockerfiles
-      dockerfile: Dockerfile-Debian-11
+      dockerfile: Dockerfile-Debian-12
     image: ansible-client-debian
     container_name: ansible-client-debian
     hostname: debian.client.ansible

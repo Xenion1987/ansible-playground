@@ -1,15 +1,17 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	"name": "Ansible-Debian-11",
+	"name": "Ansible-Debian-12",
 	"initializeCommand": "bash ./.devcontainer/scripts/initialize-command.sh",
-	"image": "mcr.microsoft.com/devcontainers/python:3-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/python:3-bookworm",
 	"runArgs": [
 		"--name=ansible-playground-control",
 		"--hostname=ansible-control",
 		"--network=ansible-playground"
 	],
-	"containerEnv": { "TZ": "Europe/Berlin" },
+	"containerEnv": {
+		"TZ": "Europe/Berlin"
+	},
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/sshd:1": {}
@@ -35,14 +37,14 @@
 				"ansible.validation.lint.path": "ansible-lint",
 				"ansible.ansible.path": "ansible",
 				"ansible.python.interpreterPath": ".devcontainer/.venv-ansible/bin/python",
-			"files.associations": {
-				"*.j2": "ansible-jinja",
-				"**/defaults/**/*.y*ml": "ansible",
-				"**/group_vars/**/*.y*ml": "ansible",
-				"**/host_vars/**/*.y*ml": "ansible",
-				"**/vars/**/*.y*ml": "ansible",
-				"**/tasks/**/*.y*ml": "ansible",
-				"**/handlers/*.y*ml": "ansible",
+				"files.associations": {
+					"*.j2": "ansible-jinja",
+					"**/defaults/**/*.y*ml": "ansible",
+					"**/group_vars/**/*.y*ml": "ansible",
+					"**/host_vars/**/*.y*ml": "ansible",
+					"**/vars/**/*.y*ml": "ansible",
+					"**/tasks/**/*.y*ml": "ansible",
+					"**/handlers/*.y*ml": "ansible",
 					"**/meta/*.y*ml": "ansible",
 					"**/roles/**/*.y*ml": "ansible",
 					"**/playbooks/**/*.y*ml": "ansible",
