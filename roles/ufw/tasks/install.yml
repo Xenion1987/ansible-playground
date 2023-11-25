@@ -1,0 +1,38 @@
+---
+# tasks file for roles/ufw
+- name: Install Uncomplicated FireWall (UFW)
+  tags:
+    - ufw
+  block:
+    - name: "[Debian/Ubuntu] Install Uncomplicated FireWall (UFW)"
+      when: ansible_distribution_file_variety | lower == "debian"
+      block:
+        - name: "[Debian/Ubuntu] Install Uncomplicated FireWall (UFW)"
+          ansible.builtin.apt:
+            name: ufw
+            state: present
+            update_cache: true
+    - name: "[RedHat/CentOS] Uncomplicated FireWall (UFW)"
+      when: ansible_distribution_file_variety | lower == "redhat"
+      block:
+        - name: "[RedHat/CentOS] Install epel-release"
+          ansible.builtin.yum:
+            name: epel-release
+            state: present
+        - name: "[RedHat/CentOS] Uncomplicated FireWall (UFW)"
+          ansible.builtin.yum:
+            name: ufw
+            state: present
+    - name: "[SUSE] Install Uncomplicated FireWall (UFW)"
+      when: ansible_distribution_file_variety | lower == "suse"
+      block:
+        - name: "[SUSE] Add Zypper Repo for UFW"
+          community.general.zypper_repository:
+            repo: "https://download.opensuse.org/repositories/security/{{ ansible_distribution_version }}/security.repo"
+            auto_import_keys: true
+            state: present
+        - name: "[SUSE] Install Uncomplicated FireWall (UFW)"
+          community.general.zypper:
+            name: ufw
+            state: present
+            update_cache: true

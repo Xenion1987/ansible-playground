@@ -1,0 +1,9 @@
+---
+- name: Play for setting up Uncomplicated FireWall
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Include role 'ufw'
+      ansible.builtin.include_role:
+        name: ufw
