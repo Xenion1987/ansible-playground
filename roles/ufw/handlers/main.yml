@@ -1,0 +1,10 @@
+---
+# handlers file for roles/ufw
+- name: Reset UFW
+  community.general.ufw:
+    state: reset
+
+- name: Reload UFW
+  community.general.ufw:
+    state: reloaded
+  when: ufw_enabled | bool

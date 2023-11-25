@@ -1,5 +1,5 @@
 ---
-- name: Play for testing stuff
+- name: Play for managing linux users
   hosts: all
   gather_facts: true
 

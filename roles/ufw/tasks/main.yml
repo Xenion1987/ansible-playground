@@ -1,0 +1,17 @@
+---
+# tasks file for roles/ufw
+- name: Manage Uncomplicated FireWall (UFW)
+    - ufw
+  block:
+    - name: Import Tasks 'install'
+      ansible.builtin.import_tasks:
+        file: install.yml
+    - name: Import Tasks 'configure'
+      ansible.builtin.import_tasks:
+        file: configure.yml
+    - name: Import Tasks 'manage'
+      ansible.builtin.import_tasks:
+        file: manage.yml
+    - name: Import Tasks 'service'
+      ansible.builtin.import_tasks:
+        file: service.yml
