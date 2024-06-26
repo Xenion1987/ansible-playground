@@ -1,20 +1,29 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	"name": "Ansible-Debian-12",
-	"initializeCommand": "bash ./.devcontainer/scripts/initialize-command.sh",
-	"image": "mcr.microsoft.com/devcontainers/python:3-bookworm",
-	"runArgs": [
-		"--name=ansible-playground-control",
-		"--hostname=ansible-control",
-		"--network=ansible-playground"
+	"name": "Ansible-Playground",
+	"dockerComposeFile": [
+		"docker-compose.yml",
+		"docker-compose.dev.yml"
 	],
-	"containerEnv": {
-		"TZ": "Europe/Berlin"
-	},
+	"service": "ansible-control",
+	"workspaceFolder": "/workspace/ansible-playground",
+	"initializeCommand": "bash ./.devcontainer/scripts/initialize-command.sh",
+	"onCreateCommand": "bash ./.devcontainer/scripts/on-create-command.sh",
+	"postCreateCommand": "bash ./.devcontainer/scripts/post-create-command.sh",
+	"remoteUser": "vscode",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		"ghcr.io/devcontainers/features/sshd:1": {}
+		"ghcr.io/devcontainers/features/sshd:1": {},
+		"ghcr.io/devcontainers/features/common-utils": {
+			"username": "vscode",
+			"userUid": 1000,
+			"userGid": 1000,
+			"installZsh": false,
+			"installOhMyZsh": false,
+			"configureZshAsDefaultShell": false,
+			"installOhMyZshConfig": false
+		}
 	},
 	// Configure tool-specific properties.
 	"customizations": {
@@ -36,7 +45,7 @@
 				"python.terminal.activateEnvironment": true,
 				"ansible.validation.lint.path": "ansible-lint",
 				"ansible.ansible.path": "ansible",
-				"ansible.python.interpreterPath": ".devcontainer/.venv-ansible/bin/python",
+				"ansible.python.interpreterPath": "python",
 				"files.associations": {
 					"*.j2": "ansible-jinja",
 					"**/defaults/**/*.y*ml": "ansible",
@@ -66,7 +75,6 @@
 			]
 		}
 	},
-	"onCreateCommand": "bash ./.devcontainer/scripts/on-create-command.sh",
 	"mounts": [
 		{
 			"source": "${localWorkspaceFolder}/.devcontainer/ssh-keys/server",
@@ -78,6 +86,5 @@
 			"target": "/home/vscode/.history_export",
 			"type": "volume"
 		}
-	],
-	"postCreateCommand": "bash ./.devcontainer/scripts/post-create-command.sh"
+	]
 }

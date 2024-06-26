@@ -1,18 +1,20 @@
-FROM opensuse/leap:15
+FROM python:slim-bookworm
 ARG TZ
-RUN zypper update -y && \
-    zypper install -y \
+RUN apt update && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt install -y --no-install-recommends \
+    dialog \
+    apt-utils \
     sudo \
     curl \
+    tzdata \
     iproute2 \
     python3 \
-    openssh-clients \
     openssh-server \
-    && zypper clean -a
+    && rm -rf /var/lib/apt/lists/*
 ENV TZ=${TZ:-Europe/Berlin}
 RUN mkdir -p /run/sshd && ssh-keygen -A \
     && install --directory --mode=0700 /root/.ssh \
     && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 COPY ./ssh-keys/clients/authorized_keys /root/.ssh/authorized_keys
 RUN chown $(id -u):$(id -g) /root/.ssh/authorized_keys && chmod 644 /root/.ssh/authorized_keys
-CMD ["/usr/sbin/sshd", "-D"]

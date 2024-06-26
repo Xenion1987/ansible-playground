@@ -1,0 +1,2 @@
+FROM local/debian-12-base
+CMD ["/usr/sbin/sshd", "-D"]

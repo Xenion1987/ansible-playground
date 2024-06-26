@@ -1,0 +1,11 @@
+FROM local/debian-12-base
+
+ARG ANSIBLE_VERSION
+ARG ANSIBLE_LINT_VERSION
+
+COPY ./scripts/setup-docker-container.sh /tmp
+
+RUN chmod +x /tmp/setup-docker-container.sh && \
+    /tmp/setup-docker-container.sh install all ansible ${ANSIBLE_VERSION} ${ANSIBLE_LINT_VERSION}
+
+# CMD ["/usr/sbin/sshd", "-D"]
