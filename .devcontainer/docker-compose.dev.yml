@@ -1,0 +1,20 @@
+---
+services:
+  ansible-control:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile-Debian-12-control
+      args:
+        TZ: Europe/Berlin
+        ANSIBLE_VERSION: ${ANSIBLE_VERSION:-<10.0.0}
+        ANSIBLE_LINT_VERSION: ${ANSIBLE_LINT_VERSION:->=24.0.0}
+    image: ansible-control
+    # container_name: ansible-control
+    hostname: control.ansible
+    environment:
+      - 'TZ=Europe/Berlin'
+    volumes:
+      - ..:/workspace/ansible-playground:cached
+    networks:
+      - ansible-playground
+    command: /bin/sh -c "while sleep 1; do :; done"

@@ -10,12 +10,16 @@ LogLevel ERROR
 Host *debian
     HostName ansible-client-debian
     User root
+    IdentityFile ~/.ssh/id_rsa
 Host *ubuntu
     HostName ansible-client-ubuntu
     User root
+    IdentityFile ~/.ssh/id_rsa
 Host *alma
     HostName ansible-client-alma
     User root
+    IdentityFile ~/.ssh/id_rsa
 Host *suse
     HostName ansible-client-suse
     User root
+    IdentityFile ~/.ssh/id_rsa

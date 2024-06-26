@@ -1,8 +1,5 @@
 .vscode
-.devcontainer/ssh-keys/server/id_rsa
-.devcontainer/ssh-keys/server/id_rsa.pub
 .devcontainer/ssh-keys/server/known_hosts
-.devcontainer/ssh-keys/clients/authorized_keys
 .devcontainer/.venv-ansible
 !collections/.keep
 collections/*

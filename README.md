@@ -23,12 +23,6 @@ git clone https://github.com/Xenion1987/ansible-playground.git
 
 Open the repository in vscode. Vscode should give you a hint, that it has detected a DevContainer config and asks you to reopen it in DevContainer. Accept to initialize and start the environment.
 
-### Customize `ansible-control` container
-
-> **This step will be executed automatically by starting the DevContainer**
-
-Starting the DevContainer will execute the script [post-create-command.sh](./.devcontainer/scripts/post-create-command.sh). Feel free to modify it to fit to your favorite tools and configs.
-
 ## Contributing
 
 This repository is [`pre-commit`](https://pre-commit.com/) enabled. Before commiting, all changes will be checked by pre-commit-hooks defined in [.pre-commit-config.yaml](./.pre-commit-config.yaml). [`pre-commit`](https://pre-commit.com/) will be installed inside the devcontainer.

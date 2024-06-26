@@ -1,0 +1,11 @@
+---
+services:
+  ansible-debian-base:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile-Debian-12-base
+      args:
+        TZ: Europe/Berlin
+    image: local/debian-12-base
+    deploy:
+      replicas: 0

@@ -1,62 +1,72 @@
-version: '3'
-
+---
 services:
   ansible-client-debian:
     build:
-      context: ./Dockerfiles
-      dockerfile: Dockerfile-Debian-12
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile-Debian-12-client
+      args:
+        TZ: Europe/Berlin
     image: ansible-client-debian
-    container_name: ansible-client-debian
+    # container_name: ansible-client-debian
     hostname: debian.client.ansible
     environment:
-      - 'TZ=Europe/Berlin'
-    volumes:
-      - ./ssh-keys/clients/authorized_keys:/root/authorized_keys:ro
+      - "TZ=Europe/Berlin"
+    # volumes:
+    #   - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
+    #   - ./ssh-keys/clients/PermitRootLogin.conf:/etc/ssh/sshd_config.d/PermitRootLogin.conf
     networks:
       - ansible-playground
 
   ansible-client-ubuntu:
     build:
-      context: ./Dockerfiles
-      dockerfile: Dockerfile-Ubuntu-22.04
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile-Ubuntu-2204
+      args:
+        TZ: Europe/Berlin
     image: ansible-client-ubuntu
-    container_name: ansible-client-ubuntu
+    # container_name: ansible-client-ubuntu
     hostname: ubuntu.client.ansible
     environment:
-      - 'TZ=Europe/Berlin'
-    volumes:
-      - ./ssh-keys/clients/authorized_keys:/root/authorized_keys:ro
+      - "TZ=Europe/Berlin"
+    # volumes:
+    #   - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
+    #   - ./ssh-keys/clients/PermitRootLogin.conf:/etc/ssh/sshd_config.d/PermitRootLogin.conf
     networks:
       - ansible-playground
 
   ansible-client-alma:
     build:
-      context: ./Dockerfiles
-      dockerfile: Dockerfile-Alma-8
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile-Alma-8
+      args:
+        TZ: Europe/Berlin
     image: ansible-client-alma
-    container_name: ansible-client-alma
+    # container_name: ansible-client-alma
     hostname: alma.client.ansible
     environment:
-      - 'TZ=Europe/Berlin'
-    volumes:
-      - ./ssh-keys/clients/authorized_keys:/root/authorized_keys:ro
+      - "TZ=Europe/Berlin"
+    # volumes:
+    #   - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
+    #   - ./ssh-keys/clients/PermitRootLogin.conf:/etc/ssh/sshd_config.d/PermitRootLogin.conf
     networks:
       - ansible-playground
 
   ansible-client-suse:
     build:
-      context: ./Dockerfiles
-      dockerfile: Dockerfile-OpenSUSE-Leap-15
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile-OpenSUSE-Leap-15
+      args:
+        TZ: Europe/Berlin
     image: ansible-client-suse
-    container_name: ansible-client-suse
+    # container_name: ansible-client-suse
     hostname: suse.client.ansible
     environment:
-      - 'TZ=Europe/Berlin'
-    volumes:
-      - ./ssh-keys/clients/authorized_keys:/root/authorized_keys:ro
+      - "TZ=Europe/Berlin"
+    # volumes:
+    #   - ./ssh-keys/clients/authorized_keys:/root/.ssh/authorized_keys:ro
+    #   - ./ssh-keys/clients/PermitRootLogin.conf:/etc/ssh/sshd_config.d/PermitRootLogin.conf
     networks:
       - ansible-playground
 
 networks:
   ansible-playground:
-    external: true

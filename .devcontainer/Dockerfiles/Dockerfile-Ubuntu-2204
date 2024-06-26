@@ -1,4 +1,5 @@
 FROM ubuntu:22.04
+ARG TZ
 RUN sed -i 's,http://archive,http://de.archive,' /etc/apt/sources.list
 RUN apt update && \
     export DEBIAN_FRONTEND=noninteractive && \
@@ -12,6 +13,10 @@ RUN apt update && \
     python3 \
     openssh-server \
     && rm -rf /var/lib/apt/lists/*
-ENV TZ='Europe/Berlin'
-RUN mkdir -p /run/sshd && ssh-keygen -A
+ENV TZ=${TZ:-Europe/Berlin}
+RUN mkdir -p /run/sshd && ssh-keygen -A \
+    && install --directory --mode=0700 /root/.ssh \
+    && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+COPY ./ssh-keys/clients/authorized_keys /root/.ssh/authorized_keys
+RUN chown $(id -u):$(id -g) /root/.ssh/authorized_keys && chmod 644 /root/.ssh/authorized_keys
 CMD ["/usr/sbin/sshd", "-D"]
