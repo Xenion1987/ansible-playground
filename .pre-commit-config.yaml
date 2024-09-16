@@ -1,25 +1,25 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: trailing-whitespace
         name: Cleanup trailing whitespaces
         args: [--markdown-linebreak-ext=md]
   - repo: https://github.com/ansible-community/ansible-lint
-    rev: v6.21.1
+    rev: v24.9.0
     hooks:
       - id: ansible-lint
         name: Check Ansible files
         args: ["--exclude", ".devcontainer/", "--exclude", ".git/", "--exclude", ".github/workflows/", "--exclude", "collections/"]
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.9.0.6
+    rev: v0.10.0.1
     hooks:
       - id: shellcheck
         name: Check '*.sh' files
         files: ^(.*)\.sh$
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.7.0-1
+    rev: v3.9.0-1
     hooks:
       - id: shfmt
         name: Format '*.sh' files

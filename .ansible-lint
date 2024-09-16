@@ -1,4 +1,5 @@
 ---
 skip_list:
   - yaml[line-length]
+  - yaml[comments-indentation]
   # - var-naming[no-role-prefix]
