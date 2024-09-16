@@ -44,7 +44,7 @@ if ! find .devcontainer/ssh-keys -type f -name id_rsa | grep -q .; then
     -v "${PWD}"/.devcontainer/ssh-keys/server/:/root/.ssh/server \
     ansible-client-debian \
     bash -c 'ssh-keygen -q -t rsa -b 4096 -f /root/.ssh/server/id_rsa -N "" -C "ansible-playground_$(date +%Y%m%d_%H%M%S)"<<<y >/dev/null'
-
+  chmod 600 .devcontainer/ssh-keys/server/id_rsa
   echo "Add 'authorized_keys' with root's public key for all clients"
   docker run --rm --name tmp_ansible_init -it \
     -v "${PWD}"/.devcontainer/ssh-keys/clients/:/root/.ssh/clients \
