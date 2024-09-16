@@ -7,5 +7,6 @@ collections/*
 # host_vars/*
 # inventory/*
 # playbooks/*
-# roles/*
+roles/*
+!roles/ufw
 ansible.cfg
