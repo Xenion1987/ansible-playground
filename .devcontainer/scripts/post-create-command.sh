@@ -8,3 +8,5 @@ mkdir -p "${HOME}/.ansible/retry-files"
 if ! git status &>/dev/null; then
   git config --global --add safe.directory "${PWD}"
 fi
+
+pre-commit install
