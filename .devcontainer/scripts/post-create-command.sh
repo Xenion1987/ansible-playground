@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-
-mkdir -p  "${HOME}/.ansible/log"
+mkdir -p "${HOME}/.ansible/log"
 touch "${HOME}/.ansible/log/ansible.log"
-mkdir -p  "${HOME}/.ansible/retry-files"
+mkdir -p "${HOME}/.ansible/retry-files"
 
 ### Fix git permissions
 if ! git status &>/dev/null; then

@@ -16,11 +16,11 @@
       when: ansible_distribution_file_variety | lower == "redhat"
       block:
         - name: "[RedHat/CentOS] Install epel-release"
-          ansible.builtin.yum:
+          ansible.builtin.dnf:
             name: epel-release
             state: present
         - name: "[RedHat/CentOS] Uncomplicated FireWall (UFW)"
-          ansible.builtin.yum:
+          ansible.builtin.dnf:
             name: ufw
             state: present
     - name: "[SUSE] Install Uncomplicated FireWall (UFW)"
