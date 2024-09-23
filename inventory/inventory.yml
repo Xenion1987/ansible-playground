@@ -1,6 +1,10 @@
 ---
 all:
   children:
+    # local:
+    #   hosts:
+    #     localhost:
+    #       ansible_connection: local
     clients:
       vars:
         ansible_python_interpreter: /usr/bin/python3
@@ -15,11 +19,11 @@ all:
                 ansible-client-debian:
                   ansible_ssh_user: root
                   ansible_ssh_private_key_file: ~/.ssh/id_rsa
-#            ubuntu:
-#              hosts:
-#                ansible-client-ubuntu:
-#                  ansible_ssh_user: root
-#                  ansible_ssh_private_key_file: ~/.ssh/id_rsa
+            # ubuntu:
+            #   hosts:
+            #     ansible-client-ubuntu:
+            #       ansible_ssh_user: root
+            #       ansible_ssh_private_key_file: ~/.ssh/id_rsa
         rpm_based:
           children:
             almalinux:
@@ -27,8 +31,8 @@ all:
                 ansible-client-alma:
                   ansible_ssh_user: root
                   ansible_ssh_private_key_file: ~/.ssh/id_rsa
-#            suse:
-#              hosts:
-#                ansible-client-suse:
-#                  ansible_ssh_user: root
-#                  ansible_ssh_private_key_file: ~/.ssh/id_rsa
+            # suse:
+            #   hosts:
+            #     ansible-client-suse:
+            #       ansible_ssh_user: root
+            #       ansible_ssh_private_key_file: ~/.ssh/id_rsa
