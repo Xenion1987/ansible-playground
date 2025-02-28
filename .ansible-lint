@@ -1,5 +1,14 @@
 ---
 skip_list:
+  - name[template]
+  - role-name
+  - schema[meta]
   - yaml[line-length]
   - yaml[comments-indentation]
-  # - var-naming[no-role-prefix]
+
+exclude_paths:
+  - .ansible/
+  - .git/
+  - .github/
+  - roles/*/tests/
+  - venv/

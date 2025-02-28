@@ -7,16 +7,28 @@ StrictHostKeyChecking no
 UserKnownHostsFile /dev/null
 LogLevel ERROR
 
-Host *debian
-    HostName ansible-client-debian
+Host *debian12
+    HostName ansible-client-debian12
     User root
     IdentityFile ~/.ssh/id_rsa
-Host *ubuntu
-    HostName ansible-client-ubuntu
+Host *ubuntu20
+    HostName ansible-client-ubuntu20
     User root
     IdentityFile ~/.ssh/id_rsa
-Host *alma
-    HostName ansible-client-alma
+Host *ubuntu22
+    HostName ansible-client-ubuntu22
+    User root
+    IdentityFile ~/.ssh/id_rsa
+Host *ubuntu24
+    HostName ansible-client-ubuntu24
+    User root
+    IdentityFile ~/.ssh/id_rsa
+Host *alma8
+    HostName ansible-client-alma8
+    User root
+    IdentityFile ~/.ssh/id_rsa
+Host *alma9
+    HostName ansible-client-alma9
     User root
     IdentityFile ~/.ssh/id_rsa
 Host *suse

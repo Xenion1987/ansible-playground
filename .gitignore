@@ -1,12 +1,15 @@
-.vscode
+.ansible/
+.vscode/
 .devcontainer/ssh-keys/server/known_hosts
 .devcontainer/.venv-ansible
-!collections/.keep
 collections/*
 # group_vars/*
 # host_vars/*
 # inventory/*
 # playbooks/*
 roles/*
-!roles/ufw
+
+.env
+.envrc
 ansible.cfg
+venv

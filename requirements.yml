@@ -1,11 +1,11 @@
 ---
 # ansible-galaxy collection install -r requirements.yml
 collections:
-  - ansible.posix
   - community.general
 
 # ansible-galaxy role install -r requirements.yml
 roles:
-  - name: user-management
-    src: https://github.com/Xenion1987/user-management
-    version: main
+  - name: user_management
+    src: xenion1987.user_management
+  - name: sudoers
+    src: xenion1987.sudoers
