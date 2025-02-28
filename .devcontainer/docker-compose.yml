@@ -1,43 +1,82 @@
 ---
 services:
-  ansible-client-debian:
+  ansible-client-debian12:
     build:
       context: .
       dockerfile: ./Dockerfiles/Dockerfile-Debian-12-client
       args:
         TZ: Europe/Berlin
     image: ansible-client-debian
-    hostname: debian.client.ansible
+    hostname: debian12.client.ansible
     environment:
       - "TZ=Europe/Berlin"
     networks:
       - ansible-playground
 
-  # ansible-client-ubuntu:
+  ansible-client-ubuntu24:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile-Ubuntu-2404
+      args:
+        TZ: Europe/Berlin
+    image: ansible-client-ubuntu24
+    hostname: ubuntu24.client.ansible
+    environment:
+      - "TZ=Europe/Berlin"
+    networks:
+      - ansible-playground
+
+  # ansible-client-ubuntu22:
   #   build:
   #     context: .
   #     dockerfile: ./Dockerfiles/Dockerfile-Ubuntu-2204
   #     args:
   #       TZ: Europe/Berlin
-  #   image: ansible-client-ubuntu
-  #   hostname: ubuntu.client.ansible
+  #   image: ansible-client-ubuntu22
+  #   hostname: ubuntu22.client.ansible
   #   environment:
   #     - "TZ=Europe/Berlin"
   #   networks:
   #     - ansible-playground
 
-  ansible-client-alma:
+  # ansible-client-ubuntu20:
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfiles/Dockerfile-Ubuntu-2004
+  #     args:
+  #       TZ: Europe/Berlin
+  #   image: ansible-client-ubuntu20
+  #   hostname: ubuntu20.client.ansible
+  #   environment:
+  #     - "TZ=Europe/Berlin"
+  #   networks:
+  #     - ansible-playground
+
+  ansible-client-alma9:
     build:
       context: .
-      dockerfile: ./Dockerfiles/Dockerfile-Alma-8
+      dockerfile: ./Dockerfiles/Dockerfile-Alma-9
       args:
         TZ: Europe/Berlin
-    image: ansible-client-alma
-    hostname: alma.client.ansible
+    image: ansible-client-alma9
+    hostname: alma9.client.ansible
     environment:
       - "TZ=Europe/Berlin"
     networks:
       - ansible-playground
+
+  # ansible-client-alma8:
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfiles/Dockerfile-Alma-8
+  #     args:
+  #       TZ: Europe/Berlin
+  #   image: ansible-client-alma8
+  #   hostname: alma8.client.ansible
+  #   environment:
+  #     - "TZ=Europe/Berlin"
+  #   networks:
+  #     - ansible-playground
 
   # ansible-client-suse:
   #   build:

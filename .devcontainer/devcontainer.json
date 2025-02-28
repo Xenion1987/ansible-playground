@@ -14,6 +14,7 @@
 	"remoteUser": "vscode",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}, // OPTIONAL use docker on the host machine
 		"ghcr.io/devcontainers/features/sshd:1": {},
 		"ghcr.io/devcontainers/features/common-utils": {
 			"username": "vscode",
@@ -43,9 +44,9 @@
 				"git.confirmSync": false,
 				"redhat.telemetry.enabled": false,
 				"python.terminal.activateEnvironment": true,
-				"ansible.validation.lint.path": "ansible-lint",
 				"ansible.ansible.path": "ansible",
 				"ansible.python.interpreterPath": "python",
+				"ansible.validation.lint.path": "ansible-lint",
 				"files.associations": {
 					"*.j2": "ansible-jinja",
 					"**/defaults/**/*.y*ml": "ansible",

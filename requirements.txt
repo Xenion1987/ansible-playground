@@ -1,0 +1,8 @@
+# https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html
+# ansible<10.0.0 # In case of testing with AlmaLinux-8
+ansible
+ansible-core>=2.11
+
+### For local testing, only
+# ansible-lint
+# pre-commit
