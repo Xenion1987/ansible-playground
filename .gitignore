@@ -8,5 +8,8 @@ collections/*
 # inventory/*
 # playbooks/*
 roles/*
+
+.env
+.envrc
 ansible.cfg
 venv

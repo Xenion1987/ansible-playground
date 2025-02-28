@@ -7,5 +7,5 @@ collections:
 roles:
   - name: user_management
     src: xenion1987.user_management
-  - name: user_management
+  - name: sudoers
     src: xenion1987.sudoers

@@ -1,0 +1,3 @@
+---
+user_management_host_ssh_from:
+  - 8.8.8.8
